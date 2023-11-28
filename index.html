@@ -7,6 +7,56 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-wvfXpqpZZVQlNVa+6q3xBDR2/q3y6cBjo8Al/l6D8h0G27oZ2c5C5pDl9tXb7e8" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
     <title>Ryan's Decathlon Page</title>
+
+    <!-- Add this style for the timeline -->
+    <style>
+        .timeline-container {
+            max-width: 800px;
+            margin: auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            transform: translateY(-50%);
+        }
+
+        .timeline-point {
+            flex-shrink: 0;
+            position: relative;
+            background-color: #004d00; /* Dark green point background */
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .timeline-point .icon {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .timeline-point .year {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .timeline-point .text {
+            font-size: 12px;
+        }
+
+        /* Add this style to ensure proper spacing for timeline points */
+        .timeline-point:not(:last-child) {
+            margin-right: 20px;
+        }
+    </style>
 </head>
 
 <body>
@@ -18,27 +68,19 @@
 
     <main>
         <div class="slideshow-container">
+            <!-- Slides will be dynamically added here -->
             <div class="mySlides fade">
-                <img src="slideshow_images/image1.jpg" style="width:100%">
+                <!-- Slide content will be dynamically added here -->
             </div>
-
-            <div class="mySlides fade">
-                <img src="slideshow_images/image2.jpg" style="width:100%">
-            </div>
-
-            <div class="mySlides fade">
-                <img src="slideshow_images/image3.jpg" style="width:100%">
-            </div>
-
-            <!-- Add more slides as needed -->
 
             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
             <a class="next" onclick="plusSlides(1)">&#10095;</a>
         </div>
 
+        <!-- Add this div for the timeline in the HTML body -->
         <div class="timeline-container">
             <h2>Timeline (2000 - 2025)</h2>
-            <div id="timeline">
+            <div class="timeline">
                 <!-- Timeline events will be dynamically added here -->
             </div>
         </div>
@@ -59,10 +101,11 @@
         <p>&copy; 2023 Ryan's Decathlon Page. All rights reserved.</p>
     </footer>
 
+    <!-- Add the slideshow and timeline scripts -->
     <script>
         // Function to add a point to the timeline
         function addTimelinePoint(year, text, iconClass) {
-            const timelineElement = document.getElementById('timeline');
+            const timelineElement = document.querySelector('.timeline');
             const pointElement = document.createElement('div');
             pointElement.classList.add('timeline-point');
             pointElement.innerHTML = `
@@ -80,19 +123,29 @@
         addTimelinePoint(2015, 'Represented Team USA for the First Time', 'fas fa-flag-usa');
         addTimelinePoint(2020, 'Achieved Personal Best in Decathlon', 'fas fa-trophy');
     </script>
+
+    <!-- Update the slideshow script to fetch images dynamically -->
     <script>
-        // Slideshow script
         let slideIndex = 0;
 
         function showSlides() {
-            let i;
             const slides = document.getElementsByClassName("mySlides");
-            for (i = 0; i < slides.length; i++) {
+            for (let i = 0; i < slides.length; i++) {
                 slides[i].style.display = "none";
             }
-            slideIndex++;
-            if (slideIndex > slides.length) { slideIndex = 1 }
-            slides[slideIndex - 1].style.display = "block";
+
+            fetchSlideshowImages()
+                .then(imageUrls => {
+                    if (imageUrls.length > 0) {
+                        slideIndex++;
+                        if (slideIndex > imageUrls.length) {
+                            slideIndex = 1;
+                        }
+                        slides[slideIndex - 1].style.display = "block";
+                    }
+                })
+                .catch(error => console.error(error));
+
             setTimeout(showSlides, 5000); // Change slide every 5 seconds
         }
 
@@ -101,6 +154,23 @@
         }
 
         showSlides();
+
+        // Function to fetch image URLs from the slideshow_images folder
+        async function fetchSlideshowImages() {
+            try {
+                const response = await fetch('slideshow_images/');
+                const html = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const imageElements = doc.querySelectorAll('a[href$=".jpg"], a[href$=".png"], a[href$=".jpeg"], a[href$=".gif"]');
+
+                const imageUrls = Array.from(imageElements).map(element => element.getAttribute('href'));
+                return imageUrls;
+            } catch (error) {
+                console.error('Error fetching slideshow images:', error);
+                return [];
+            }
+        }
     </script>
 </body>
 
