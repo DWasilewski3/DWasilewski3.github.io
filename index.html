@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Decathalete Ryan Talbot</title>
+    <title>Ryan's Decathlon Page</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,12 +13,18 @@
         }
 
         header {
-            background-color: #f2f2f2;
+            background-color: #004d00;
             padding: 10px;
+            color: white;
         }
 
         main {
             margin-top: 20px;
+        }
+
+        section {
+            text-align: left;
+            margin: 20px;
         }
 
         footer {
@@ -26,24 +32,102 @@
             padding: 10px;
             background-color: #f2f2f2;
         }
+
+        #session-counter,
+        #instagram-feed {
+            font-size: 18px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 
 <body>
     <header>
-        <h1>Your Website Name</h1>
+        <h1>Ryan's Decathlon Page</h1>
+        <img src="msu_logo.png" alt="Michigan State University Logo" width="50">
+        <img src="team_usa_logo.png" alt="Team USA Logo" width="50">
     </header>
 
     <main>
         <section>
-            <h2>Welcome to My Website</h2>
-            <p>This is a sample text for your homepage. You can replace it with your own content.</p>
+            <h2>About the Decathlon</h2>
+            <p>
+                The decathlon is a combined event in athletics consisting of ten track and field events.
+                These events are spread over two days, and the athlete scores points based on their performance in each discipline.
+                The events include sprinting, jumping, throwing, and distance running.
+            </p>
+        </section>
+
+        <section>
+            <h2>Personal Records</h2>
+            <ul>
+                <li>100m: 10.81 seconds</li>
+                <li>Long Jump: 7.80 meters</li>
+                <li>Shot Put: 15.26 meters</li>
+                <li>High Jump: 2.10 meters</li>
+                <li>400m: 48.42 seconds</li>
+                <li>110m Hurdles: 13.75 seconds</li>
+                <li>Discus Throw: 50.54 meters</li>
+                <li>Pole Vault: 5.45 meters</li>
+                <li>Javelin Throw: 71.90 meters</li>
+                <li>1500m: 4:17.52 minutes</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>How Points Work in the Decathlon</h2>
+            <p>
+                The decathlon scoring system assigns points to an athlete's performance in each event.
+                The better the performance, the more points are earned. The total points from all events determine the overall winner.
+                The world record in the decathlon is held by Ashton Eaton with a total of 9045 points.
+            </p>
+        </section>
+
+        <section id="instagram-feed">
+            <h2>Instagram Feed</h2>
+            <!-- Instagram feed will be displayed here -->
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2023 Your Website. All rights reserved.</p>
+        <p>&copy; 2023 Ryan's Decathlon Page. All rights reserved.</p>
     </footer>
+
+    <script>
+        // Session counter script
+        const sessionCounterElement = document.getElementById('session-counter');
+        let startTime = new Date();
+
+        /*function updateSessionCounter() {
+            const currentTime = new Date();
+            const sessionDuration = Math.floor((currentTime - startTime) / 1000); // in seconds
+            sessionCounterElement.innerText = `Session Duration: ${sessionDuration} seconds`;
+        }
+
+        // Update the counter every second
+        setInterval(updateSessionCounter, 1000);*/
+
+        // Instagram feed script (replace 'USERNAME' with your actual Instagram username)
+        const instagramFeedElement = document.getElementById('instagram-feed');
+        const instagramUsername = 'USERNAME';
+        const instagramApiUrl = 'https://www.instagram.com/_ryan_talbot_/?__a=1';
+
+        async function fetchInstagramPosts() {
+            try {
+                const response = await fetch(instagramApiUrl);
+                const data = await response.json();
+                const posts = data.graphql.user.edge_owner_to_timeline_media.edges.slice(0, 3);
+                const postHTML = posts.map(post => `<img src="${post.node.thumbnail_src}" alt="Instagram Post">`).join('');
+                instagramFeedElement.innerHTML = postHTML;
+            } catch (error) {
+                console.error('Error fetching Instagram posts:', error);
+                instagramFeedElement.innerHTML = '<p>Unable to load Instagram feed.</p>';
+            }
+        }
+
+        // Fetch Instagram posts on page load
+        fetchInstagramPosts();
+    </script>
 </body>
 
 </html>
