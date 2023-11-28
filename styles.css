@@ -1,3 +1,36 @@
+/* Add this style for the slideshow */
+.slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+}
+
+.mySlides {
+    display: none;
+}
+
+.prev,
+.next {
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    font-size: 20px;
+    color: white;
+    background-color: #004d00;
+    border: none;
+    cursor: pointer;
+}
+
+.prev {
+    left: 0;
+}
+
+.next {
+    right: 0;
+}
+
 /* Add this style for the timeline */
 .timeline-container {
     max-width: 800px;
@@ -5,7 +38,8 @@
 }
 
 .timeline-point {
-    position: relative;
+    display: flex;
+    align-items: center;
     background-color: #004d00; /* Dark green point background */
     color: white;
     padding: 10px;
@@ -30,4 +64,33 @@
 /* Add this style to ensure proper spacing for timeline points */
 .timeline-point:not(:last-child) {
     margin-bottom: 20px;
+}
+
+/* Rest of your existing styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    text-align: center;
+    background-color: #fff; /* White background */
+    color: #000; /* Black text */
+}
+
+header {
+    background-color: #004d00; /* Dark green header background */
+    padding: 10px;
+    color: white;
+}
+
+.logo {
+    width: 30px;
+}
+
+main {
+    margin-top: 20px;
+}
+
+footer {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f2f2f2; /* Light grey footer background */
 }

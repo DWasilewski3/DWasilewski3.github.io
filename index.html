@@ -17,6 +17,25 @@
     </header>
 
     <main>
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+                <img src="slideshow_images/image1.jpg" style="width:100%">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="slideshow_images/image2.jpg" style="width:100%">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="slideshow_images/image3.jpg" style="width:100%">
+            </div>
+
+            <!-- Add more slides as needed -->
+
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+
         <div class="timeline-container">
             <h2>Timeline (2000 - 2025)</h2>
             <div id="timeline">
@@ -47,8 +66,8 @@
             const pointElement = document.createElement('div');
             pointElement.classList.add('timeline-point');
             pointElement.innerHTML = `
-                <div class="year">${year}</div>
                 <div class="icon"><i class="${iconClass}"></i></div>
+                <div class="year">${year}</div>
                 <div class="text">${text}</div>
             `;
             timelineElement.appendChild(pointElement);
@@ -60,6 +79,28 @@
         addTimelinePoint(2010, 'Joined Michigan State University Team', 'fas fa-university');
         addTimelinePoint(2015, 'Represented Team USA for the First Time', 'fas fa-flag-usa');
         addTimelinePoint(2020, 'Achieved Personal Best in Decathlon', 'fas fa-trophy');
+    </script>
+    <script>
+        // Slideshow script
+        let slideIndex = 0;
+
+        function showSlides() {
+            let i;
+            const slides = document.getElementsByClassName("mySlides");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1 }
+            slides[slideIndex - 1].style.display = "block";
+            setTimeout(showSlides, 5000); // Change slide every 5 seconds
+        }
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        showSlides();
     </script>
 </body>
 
