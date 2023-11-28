@@ -4,83 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-wvfXpqpZZVQlNVa+6q3xBDR2/q3y6cBjo8Al/l6D8h0G27oZ2c5C5pDl9tXb7e8" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
     <title>Ryan's Decathlon Page</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 40px;
-            text-align: center;
-        }
-
-        header {
-            background-color: #004d00;
-            padding: 10px;
-            color: white;
-        }
-
-        main {
-            margin-top: 20px;
-        }
-
-        section {
-            text-align: left;
-            margin: 20px;
-        }
-
-        footer {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #f2f2f2;
-        }
-
-        #session-counter,
-        #instagram-feed {
-            font-size: 18px;
-            margin-top: 20px;
-        }
-    </style>
 </head>
 
 <body>
     <header>
         <h1>Ryan's Decathlon Page</h1>
-        <img src="msu_logo.png" alt="Michigan State University Logo" width="50">
-        <img src="team_usa_logo.png" alt="Team USA Logo" width="50">
+        <img src="msu_logo.png" alt="Michigan State University Logo" class="logo">
+        <img src="team_usa_logo.png" alt="Team USA Logo" class="logo">
     </header>
 
     <main>
-        <section>
-            <h2>About the Decathlon</h2>
-            <p>
-                The decathlon is a combined event in athletics consisting of ten track and field events.
-                These events are spread over two days, and the athlete scores points based on their performance in each discipline.
-                The events include sprinting, jumping, throwing, and distance running.
-            </p>
-        </section>
+        <div class="timeline-container">
+            <h2>Timeline (2000 - 2025)</h2>
+            <div id="timeline">
+                <!-- Timeline events will be dynamically added here -->
+            </div>
+        </div>
 
-        <section>
-            <h2>Personal Records</h2>
-            <ul>
-                <li>100m: 10.81 seconds</li>
-                <li>Long Jump: 7.80 meters</li>
-                <li>Shot Put: 15.26 meters</li>
-                <li>High Jump: 2.10 meters</li>
-                <li>400m: 48.42 seconds</li>
-                <li>110m Hurdles: 13.75 seconds</li>
-                <li>Discus Throw: 50.54 meters</li>
-                <li>Pole Vault: 5.45 meters</li>
-                <li>Javelin Throw: 71.90 meters</li>
-                <li>1500m: 4:17.52 minutes</li>
-            </ul>
-        </section>
+        <!-- Rest of your content -->
 
-        <section>
-            <h2>How Points Work in the Decathlon</h2>
-            <p>
-                The decathlon scoring system assigns points to an athlete's performance in each event.
-                The better the performance, the more points are earned. The total points from all events determine the overall winner.
-                The world record in the decathlon is held by Ashton Eaton with a total of 9045 points.
-            </p>
+        <section id="session-counter">
+            <!-- Session counter will be displayed here -->
         </section>
 
         <section id="instagram-feed">
@@ -94,39 +41,25 @@
     </footer>
 
     <script>
-        // Session counter script
-        const sessionCounterElement = document.getElementById('session-counter');
-        let startTime = new Date();
-
-        /*function updateSessionCounter() {
-            const currentTime = new Date();
-            const sessionDuration = Math.floor((currentTime - startTime) / 1000); // in seconds
-            sessionCounterElement.innerText = `Session Duration: ${sessionDuration} seconds`;
+        // Function to add a point to the timeline
+        function addTimelinePoint(year, text, iconClass) {
+            const timelineElement = document.getElementById('timeline');
+            const pointElement = document.createElement('div');
+            pointElement.classList.add('timeline-point');
+            pointElement.innerHTML = `
+                <div class="year">${year}</div>
+                <div class="icon"><i class="${iconClass}"></i></div>
+                <div class="text">${text}</div>
+            `;
+            timelineElement.appendChild(pointElement);
         }
 
-        // Update the counter every second
-        setInterval(updateSessionCounter, 1000);*/
-
-        // Instagram feed script (replace 'USERNAME' with your actual Instagram username)
-        const instagramFeedElement = document.getElementById('instagram-feed');
-        const instagramUsername = 'USERNAME';
-        const instagramApiUrl = 'https://www.instagram.com/_ryan_talbot_/?__a=1';
-
-        async function fetchInstagramPosts() {
-            try {
-                const response = await fetch(instagramApiUrl);
-                const data = await response.json();
-                const posts = data.graphql.user.edge_owner_to_timeline_media.edges.slice(0, 3);
-                const postHTML = posts.map(post => `<img src="${post.node.thumbnail_src}" alt="Instagram Post">`).join('');
-                instagramFeedElement.innerHTML = postHTML;
-            } catch (error) {
-                console.error('Error fetching Instagram posts:', error);
-                instagramFeedElement.innerHTML = '<p>Unable to load Instagram feed.</p>';
-            }
-        }
-
-        // Fetch Instagram posts on page load
-        fetchInstagramPosts();
+        // Add timeline points with icons (modify as needed)
+        addTimelinePoint(2000, 'Started Decathlon Training', 'fas fa-dumbbell');
+        addTimelinePoint(2005, 'First Decathlon Competition', 'fas fa-flag');
+        addTimelinePoint(2010, 'Joined Michigan State University Team', 'fas fa-university');
+        addTimelinePoint(2015, 'Represented Team USA for the First Time', 'fas fa-flag-usa');
+        addTimelinePoint(2020, 'Achieved Personal Best in Decathlon', 'fas fa-trophy');
     </script>
 </body>
 

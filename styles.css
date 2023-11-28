@@ -1,0 +1,33 @@
+/* Add this style for the timeline */
+.timeline-container {
+    max-width: 800px;
+    margin: auto;
+}
+
+.timeline-point {
+    position: relative;
+    background-color: #004d00; /* Dark green point background */
+    color: white;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+.timeline-point .icon {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.timeline-point .year {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.timeline-point .text {
+    font-size: 16px;
+}
+
+/* Add this style to ensure proper spacing for timeline points */
+.timeline-point:not(:last-child) {
+    margin-bottom: 20px;
+}
