@@ -1,177 +1,283 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-wvfXpqpZZVQlNVa+6q3xBDR2/q3y6cBjo8Al/l6D8h0G27oZ2c5C5pDl9tXb7e8" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css">
-    <title>Ryan's Decathlon Page</title>
-
-    <!-- Add this style for the timeline -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        .timeline-container {
-            max-width: 800px;
-            margin: auto;
-            position: relative;
-            overflow: hidden;
+        body {
+            font-family: Arial, sans-serif;
+            padding-top: 20px;
+            padding-left: 50px;  
+        }
+
+        #instagram, #timer, #footer {
+            background-color: #f8f9fa;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .side-menu {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+        /* Menu option styles */
+        .side-menu a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        /* Close button styles */
+        .close-btn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        /* Menu icon styles */
+        .menu-icon {
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-size: 30px;
+            cursor: pointer;
         }
 
         .timeline {
-            display: flex;
-            justify-content: space-between;
+            position: relative;
+            max-width: 1200px;
+            margin: 50px auto;
+            height: 130px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: black;
+            top: 50%; /* Adjust this value to move the black line */
+            left: 0;
+        }
+        .event {
+            position: absolute;
+            bottom: 0;
+            width: 24px;
+            height: 24px;
+            text-align: center;
+        }
+        .event i {
+            position: relative;
+            top: 40px;
+            font-size: 24px;
+            transition: font-size 0.3s;
+            left: -10%;
+        }
+        .event:hover i {
+            font-size: 30px;
+        }
+        .event-title {
+            position: absolute;
+            width: 100px;
+            left: -40px;
+            text-align: center;
+            bottom: 0px;
+        }
+        .event-date {
+            position: absolute;
+            width: 100px;
+            left: -40px;
+            text-align: center;
+            top: 60px;
+        }
+        .event-title span {
+            display: none;
+            position: absolute;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            padding: 5px 0;
+            border-radius: 6px;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .event-title span::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
+        .event-title:hover span {
+            display: block;
+            opacity: 1;
+        }
+        .image-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+        }
+
+        .overlay-text {
             position: absolute;
             top: 50%;
-            width: 100%;
-            transform: translateY(-50%);
-        }
-
-        .timeline-point {
-            flex-shrink: 0;
-            position: relative;
-            background-color: #004d00; /* Dark green point background */
+            left: 50%;
+            transform: translate(-50%, -50%);
             color: white;
-            padding: 10px;
-            border-radius: 5px;
+            text-align: center;
+        }
+        #navbar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 200px;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: flex-start;
         }
-
-        .timeline-point .icon {
-            font-size: 24px;
-            margin-bottom: 5px;
-        }
-
-        .timeline-point .year {
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        .timeline-point .text {
-            font-size: 12px;
-        }
-
-        /* Add this style to ensure proper spacing for timeline points */
-        .timeline-point:not(:last-child) {
-            margin-right: 20px;
+        .footer-links img {
+            width: 24px; /* Adjust this value to change the size of the logos */
         }
     </style>
 </head>
-
 <body>
-    <header>
-        <h1>Ryan's Decathlon Page</h1>
-        <img src="msu_logo.png" alt="Michigan State University Logo" class="logo">
-        <img src="team_usa_logo.png" alt="Team USA Logo" class="logo">
-    </header>
 
-    <main>
-        <div class="slideshow-container">
-            <!-- Slides will be dynamically added here -->
-            <div class="mySlides fade">
-                <!-- Slide content will be dynamically added here -->
-            </div>
+    <div id="side-menu" class="side-menu">
+        <a href="javascript:void(0)" class="close-btn" onclick="closeSideMenu()">&times;</a>
+        <a href="decathlon.html">Decathlon Score Calculator</a>
+        <!-- Add more menu options here -->
+      </div>
+      
+      <!-- Menu icon to open the side menu -->
+      <span class="menu-icon" onclick="openSideMenu()">☰</span>
 
-            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    <div class="image-container">
+        <img src="images\Team_USA_pics\flag_flex.jpg" alt="flag_flex.jpg">
+        <div class="overlay-text">Ryan Talbot at the Pan-Am Games in Chile</div>
+    </div>
+
+    <div id="timer">
+        <h2>Timer</h2>
+        <p id="session-length">Session length: 0 seconds</p>
+        <ul id="events">
+            <!-- Decathlon events will be added here -->
+        </ul>
+    </div>
+
+    <div class="timeline" id="timeline">
+        <!-- Events will be added here -->
+    </div>
+
+    <div id="footer">
+        <p>© 2023 My Website</p>
+        <div class="footer-links">
+            <a href="https://www.instagram.com/_ryan_talbot_/" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/1024px-Instagram_icon.png" alt="Instagram"></a>
+            <a href="https://msuspartans.com/sports/track-and-field/roster/ryan-talbot/13551" alt="MSU"></a>
         </div>
+    </div>
 
-        <!-- Add this div for the timeline in the HTML body -->
-        <div class="timeline-container">
-            <h2>Timeline (2000 - 2025)</h2>
-            <div class="timeline">
-                <!-- Timeline events will be dynamically added here -->
-            </div>
-        </div>
-
-        <!-- Rest of your content -->
-
-        <section id="session-counter">
-            <!-- Session counter will be displayed here -->
-        </section>
-
-        <section id="instagram-feed">
-            <h2>Instagram Feed</h2>
-            <!-- Instagram feed will be displayed here -->
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2023 Ryan's Decathlon Page. All rights reserved.</p>
-    </footer>
-
-    <!-- Add the slideshow and timeline scripts -->
     <script>
-        // Function to add a point to the timeline
-        function addTimelinePoint(year, text, iconClass) {
-            const timelineElement = document.querySelector('.timeline');
-            const pointElement = document.createElement('div');
-            pointElement.classList.add('timeline-point');
-            pointElement.innerHTML = `
-                <div class="icon"><i class="${iconClass}"></i></div>
-                <div class="year">${year}</div>
-                <div class="text">${text}</div>
-            `;
-            timelineElement.appendChild(pointElement);
+        
+
+        function addEvent(event) {
+            var timeline = document.getElementById('timeline');
+            var eventElement = document.createElement('div');
+            eventElement.className = 'event';
+            eventElement.style.left = ((event.date - 2000) / 25 * 100) + '%';
+            eventElement.innerHTML = '<i class="' + event.symbol + '" style="color: ' + event.color + ';"></i><div class="event-title">' + event.title + '<span>' + event.description + '</span></div><div class="event-date">' + event.date + '</div>';
+            timeline.appendChild(eventElement);
         }
 
-        // Add timeline points with icons (modify as needed)
-        addTimelinePoint(2000, 'Started Decathlon Training', 'fas fa-dumbbell');
-        addTimelinePoint(2005, 'First Decathlon Competition', 'fas fa-flag');
-        addTimelinePoint(2010, 'Joined Michigan State University Team', 'fas fa-university');
-        addTimelinePoint(2015, 'Represented Team USA for the First Time', 'fas fa-flag-usa');
-        addTimelinePoint(2020, 'Achieved Personal Best in Decathlon', 'fas fa-trophy');
-    </script>
+        //100m, long jump, shot put, high jump, 400m, 110m hurdles, discus, pole vault, javelin, 1500m
+        var trackEvents = [
+            {title: '100m', A: 25.4347, B: 18, C: 1.81, isTimed: true, day1: true, highScore: 10.6, points: 952, worldRecord: 10.55, WRpoints: 963},
+            {title: 'Long Jump', A: 0.14354, B: 220, C: 1.4, isTimed: false, day1: true, highScore: 689, points: 788, worldRecord: 780, WRpoints: 1010},
+            {title: 'Shot Put', A: 51.39, B: 1.5, C: 1.05, isTimed: false, day1: true, highScore: 15.14, points: 798, worldRecord: 16.00, WRpoints: 851},
+            {title: 'High Jump', A: 0.8465, B: 75, C: 1.42, isTimed: false, day1: true, highScore: 191, points: 723, worldRecord: 2.05, WRpoints: 850},
+            {title: '400m', A: 1.53775, B: 82, C: 1.81, isTimed: true, day1: true, highScore: 47.52, points: 933, worldRecord: 48.42, WRpoints: 889},
+            {title: '110m Hurdles', A: 5.74352, B: 28.5, C: 1.92, isTimed: true, day1: false, highScore: 14.71, points: 885, worldRecord: 13.75, WRpoints: 1007},
+            {title: 'Discus', A: 12.91, B: 4, C: 1.1, isTimed: false, day1: false, highScore: 50.66, points: 884, worldRecord: 50.54, WRpoints: 882},
+            {title: 'Pole Vault', A: 0.2797, B: 100, C: 1.35, isTimed: false, day1: false, highScore: 5.2, points: 972, worldRecord: 545, WRpoints: 1051},
+            {title: 'Javelin', A: 10.14, B: 7, C: 1.08, isTimed: false, day1: false, highScore: 58.18, points: 710, worldRecord: 71.90, WRpoints: 918},
+            {title: '1500m', A: 0.03768, B: 480, C: 1.85, isTimed: true, day1: false, highScore: 280.73, points: 676, worldRecord: 276.11, WRpoints: 705},
+        ];
+        localStorage.setItem('trackEvents', JSON.stringify(trackEvents));
 
-    <!-- Update the slideshow script to fetch images dynamically -->
-    <script>
-        let slideIndex = 0;
+        var events = [
+            {title: '11/23', description: 'Ryan placed 3rd at the Pan-American Games hosted in Chile', symbol: 'fas fa-medal', date: 2023, color: '#cd7f32'},
+            {title: '5/22', description: 'Ryan won the decathlon event at the Big Ten conference championship and set a new MSU record of 8064', symbol: 'fas fa-medal', date: 2022, color: 'gold'},
+            {title: '2/19', description: 'Ryan broke his own pole vault record for the last time in high school and won the indoor state meet with a height of 16\'0"', symbol: 'fas fa-medal', date: 2019, color: 'gold'},
+            {title: '12/18', description: 'Ryan committed to the MSU track and field team', symbol: 'fas graduate-cap', date: 2018, color: 'darkgreen'},
+            {title: '4/16', description: 'Ryan set the Forest Hils Central High School record for pole vault at 13\'2"', symbol: 'fas person-walking', date: 2016, color: 'green'},
+        ];
 
-        function showSlides() {
-            const slides = document.getElementsByClassName("mySlides");
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
+        events.forEach(addEvent);
+
+        function calculateTrackEventScore(score, event) {
+            return event.isTimed ? Math.round(event.A * Math.pow((event.B - score), event.C)) : Math.round(event.A * Math.pow((score - event.B), event.C));
+        }
+
+
+        var sessionStart = Date.now(); // Initialize sessionStart when the user loads the website
+
+        // Function to update the timer and check track events
+        function updateTimerAndTrackEvents() {
+        var timerElement = document.getElementById('session-length');
+        var sessionLength = Math.floor((Date.now() - sessionStart) / 1000);
+        timerElement.textContent = 'Session length: ' + sessionLength + ' seconds';
+
+        // Assuming trackEvents is an array of objects defined somewhere in your code
+        trackEvents.forEach(function(trackEvent, index) {
+            if (trackEvent.isTimed && sessionLength > trackEvent.highScore) {
+            var trackEventElement = document.getElementById('trackEvent-' + index);
+            trackEventElement.textContent = 'You have been on this site longer than it takes to ' + trackEvent.title;
             }
+        });
+        }
+        setInterval(updateTimerAndTrackEvents, 1000);
 
-            fetchSlideshowImages()
-                .then(imageUrls => {
-                    if (imageUrls.length > 0) {
-                        slideIndex++;
-                        if (slideIndex > imageUrls.length) {
-                            slideIndex = 1;
-                        }
-                        slides[slideIndex - 1].style.display = "block";
-                    }
-                })
-                .catch(error => console.error(error));
 
-            setTimeout(showSlides, 5000); // Change slide every 5 seconds
+        function addTrackEvent(trackEvent, index) {
+            var eventElement = document.createElement('li');
+            trackEventElement.id = 'trackEvent-' + index;
+            trackEventElement.textContent = trackEvent.name + ': ' + trackEvent.highScore;
+            trackEventsElement.appendChild(trackEventElement);
         }
 
-        function plusSlides(n) {
-            showSlides(slideIndex += n);
+        trackEvents.forEach(addTrackEvent);
+
+        function openSideMenu() {
+            document.getElementById("side-menu").style.width = "250px";
         }
 
-        showSlides();
-
-        // Function to fetch image URLs from the slideshow_images folder
-        async function fetchSlideshowImages() {
-            try {
-                const response = await fetch('slideshow_images/');
-                const html = await response.text();
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                const imageElements = doc.querySelectorAll('a[href$=".jpg"], a[href$=".png"], a[href$=".jpeg"], a[href$=".gif"]');
-
-                const imageUrls = Array.from(imageElements).map(element => element.getAttribute('href'));
-                return imageUrls;
-            } catch (error) {
-                console.error('Error fetching slideshow images:', error);
-                return [];
-            }
+        // Function to close the side menu
+        function closeSideMenu() {
+            document.getElementById("side-menu").style.width = "0";
         }
+
     </script>
 </body>
-
 </html>
