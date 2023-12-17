@@ -161,6 +161,9 @@
         .footer-links img {
             width: 24px; /* Adjust this value to change the size of the logos */
         }
+        .no-bullet {
+            list-style-type: none;
+        }
     </style>
 </head>
 <body>
@@ -180,8 +183,7 @@
     </div>
 
     <div id="timer">
-        <h2>Timer</h2>
-        <p id="session-length">Session length: 0 seconds</p>
+        <h2 id="session-length">You've been here for 0 seconds</h2>
         <ul id="events">
             <!-- Decathlon events will be added here -->
         </ul>
@@ -192,7 +194,7 @@
     </div>
 
     <div id="footer">
-        <p>© 2023 My Website</p>
+        <p>All Rights Reserved</p>
         <div class="footer-links">
             <a href="https://www.instagram.com/_ryan_talbot_/" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/1024px-Instagram_icon.png" alt="Instagram"></a>
             <a href="https://msuspartans.com/sports/track-and-field/roster/ryan-talbot/13551" alt="MSU"></a>
@@ -200,16 +202,9 @@
     </div>
 
     <script>
-        
 
-        function addEvent(event) {
-            var timeline = document.getElementById('timeline');
-            var eventElement = document.createElement('div');
-            eventElement.className = 'event';
-            eventElement.style.left = ((event.date - 2000) / 25 * 100) + '%';
-            eventElement.innerHTML = '<i class="' + event.symbol + '" style="color: ' + event.color + ';"></i><div class="event-title">' + event.title + '<span>' + event.description + '</span></div><div class="event-date">' + event.date + '</div>';
-            timeline.appendChild(eventElement);
-        }
+
+        var trackEventsElement = document.getElementById('events');
 
         //100m, long jump, shot put, high jump, 400m, 110m hurdles, discus, pole vault, javelin, 1500m
         var trackEvents = [
@@ -234,8 +229,6 @@
             {title: '4/16', description: 'Ryan set the Forest Hils Central High School record for pole vault at 13\'2"', symbol: 'fas person-walking', date: 2016, color: 'green'},
         ];
 
-        events.forEach(addEvent);
-
         function calculateTrackEventScore(score, event) {
             return event.isTimed ? Math.round(event.A * Math.pow((event.B - score), event.C)) : Math.round(event.A * Math.pow((score - event.B), event.C));
         }
@@ -243,31 +236,62 @@
 
         var sessionStart = Date.now(); // Initialize sessionStart when the user loads the website
 
-        // Function to update the timer and check track events
-        function updateTimerAndTrackEvents() {
-        var timerElement = document.getElementById('session-length');
-        var sessionLength = Math.floor((Date.now() - sessionStart) / 1000);
-        timerElement.textContent = 'Session length: ' + sessionLength + ' seconds';
-
-        // Assuming trackEvents is an array of objects defined somewhere in your code
-        trackEvents.forEach(function(trackEvent, index) {
-            if (trackEvent.isTimed && sessionLength > trackEvent.highScore) {
-            var trackEventElement = document.getElementById('trackEvent-' + index);
-            trackEventElement.textContent = 'You have been on this site longer than it takes to ' + trackEvent.title;
-            }
-        });
+        function addEvent(event) {
+            var timeline = document.getElementById('timeline');
+            var eventElement = document.createElement('div');
+            eventElement.className = 'event';
+            eventElement.style.left = ((event.date - 2000) / 25 * 100) + '%';
+            eventElement.innerHTML = '<i class="' + event.symbol + '" style="color: ' + event.color + ';"></i><div class="event-title">' + event.title + '<span>' + event.description + '</span></div><div class="event-date">' + event.date + '</div>';
+            timeline.appendChild(eventElement);
         }
-        setInterval(updateTimerAndTrackEvents, 1000);
-
 
         function addTrackEvent(trackEvent, index) {
-            var eventElement = document.createElement('li');
+            var trackEventElement = document.createElement('li');
+            trackEventElement.className = "no-bullet";
             trackEventElement.id = 'trackEvent-' + index;
-            trackEventElement.textContent = trackEvent.name + ': ' + trackEvent.highScore;
+            trackEventElement.textContent = '';
             trackEventsElement.appendChild(trackEventElement);
         }
 
-        trackEvents.forEach(addTrackEvent);
+        var sortedTrackEvents = trackEvents.slice().sort((a, b) => a.highScore - b.highScore);
+        var timedEvents = sortedTrackEvents.filter(event => event.isTimed);
+        var addedEvents = [];
+        var combinedHighScore = 999;
+        var combined = true;
+        function updateTimerAndTrackEvents() {
+
+            // Update timer 
+            var timerElement = document.getElementById('session-length');
+            var textbox = document.getElementById('events');
+            var sessionLength = Math.floor((Date.now() - sessionStart) / 1000);
+            var seconds = sessionLength % 60;
+            var minutes = Math.floor(sessionLength / 60);
+
+            timerElement.textContent = String('You\'ve been here for ' + (minutes > 0 ? minutes + ' minute' + (minutes > 1 ? 's ' : ' ') + (seconds > 0 ? ' and ' + seconds + ' seconds' : '') : seconds + ' second' + (seconds  > 1 ? 's' : '')));
+
+            // Check track events
+            timedEvents.forEach((event, index) => {
+
+                // Check event condition
+                if (sessionLength > event.highScore && !addedEvents.includes(event)) {
+                    var textbox = document.getElementById('events');
+                    var eventListStr = '';
+                    addedEvents.push(event);
+                    combinedHighScore = addedEvents.reduce((total, currentEvent) => total + currentEvent.highScore, 0);
+                    combined = false;
+
+                    if (addedEvents.length === 1) eventListStr = addedEvents[0].title;
+                    else if (addedEvents.length === 2) eventListStr = addedEvents.map(e => e.title).join(' and ');
+                    else eventListStr = addedEvents.slice(0, -1).map(e => e.title).join(', ') + ', and ' + addedEvents.slice(-1)[0].title;
+
+                    textbox.textContent = 'You have been on this site longer than it takes Ryan to run the ' + eventListStr;
+                } 
+                if (sessionLength > combinedHighScore && addedEvents.length > 1 && !combined) {
+                    document.getElementById('events').textContent += ' combined';
+                    combined = true;
+                }
+            });
+        }
 
         function openSideMenu() {
             document.getElementById("side-menu").style.width = "250px";
@@ -277,6 +301,10 @@
         function closeSideMenu() {
             document.getElementById("side-menu").style.width = "0";
         }
+
+        events.forEach(addEvent);
+        timedEvents.forEach(addTrackEvent);
+        setInterval(updateTimerAndTrackEvents, 1000);
 
     </script>
 </body>
