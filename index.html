@@ -8,7 +8,7 @@
             background-color: #f8f9fa;
             padding: 20px;
             text-align: center;
-            font-size: 30px;
+            font-size: 200%;
         }
         
         #topbar {
@@ -18,15 +18,19 @@
             padding: 10px;
         }
         #topbar button {
-            width: 25%; 
+            width: 20%; 
+            font-size: 150%;
         }
         #instagram, #timer, #footer {
             background-color: #f8f9fa;
             text-align: center;
             padding: 20px;
         }
+        #events {
+            font-size: 24px; 
+        }
         .footer-links img {
-            width: 50px;
+            width: 75px;
             padding-inline: 10px;
             border-radius: 33%;
         }
@@ -294,10 +298,225 @@
                 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* A soft shadow to lift the header */
                 border-radius: 5px; /* Rounded corners */
             }
+            .form {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                max-width: 350px;
+                background-color: #355891;
+                padding: 20px;
+                border-radius: 10px;
+                position: relative;
+                }
+
+                .message {
+                color: #355891;
+                font-size: 14px;
+                }
+
+                .flex {
+                display: flex;
+                width: 100%;
+                gap: 6px;
+                }
+
+                .form label {
+                position: relative;
+                }
+
+                .form label .input {
+                width: 100%;
+                padding: 10px 10px 20px 10px;
+                outline: 0;
+                border: 1px solid #355891;
+                border-radius: 5px;
+                }
+
+                .form label .input + span {
+                position: absolute;
+                left: 10px;
+                top: 15px;
+                color: #355891;
+                font-size: 0.9em;
+                cursor: text;
+                transition: 0.3s ease;
+                }
+
+                .form label .input:placeholder-shown + span {
+                top: 15px;
+                font-size: 0.9em;
+                }
+
+                .form label .input:focus + span,.form label .input:valid + span {
+                top: 30px;
+                font-size: 0.7em;
+                font-weight: 600;
+                }
+
+                .form label .input:valid + span {
+                color: green;
+                }
+
+                .input01 {
+                width: 100%;
+                padding: 10px 10px 20px 10px;
+                outline: 0;
+                border: 1px solid #355891;
+                border-radius: 5px;
+                }
+
+                .form label .input01 + span {
+                position: absolute;
+                left: 10px;
+                top: 50px;
+                color: #355891;
+                font-size: 0.9em;
+                cursor: text;
+                transition: 0.3s ease;
+                }
+
+                .form label .input01:placeholder-shown + span {
+                top: 40px;
+                font-size: 0.9em;
+                }
+
+                .form label .input01:focus + span,.form label .input01:valid + span {
+                top: 50px;
+                font-size: 0.7em;
+                font-weight: 600;
+                }
+
+                .form label .input01:valid + span {
+                color: green;
+                }
+
+                .fancy {
+                background-color: white;
+                border: 2px solid #355891;
+                border-radius: 0px;
+                box-sizing: border-box;
+                color: #355891;
+                cursor: pointer;
+                display: inline-block;
+                font-weight: 390;
+                letter-spacing: 2px;
+                margin: 0;
+                outline: none;
+                overflow: visible;
+                padding: 8px 30px;
+                position: relative;
+                text-align: center;
+                text-decoration: none;
+                text-transform: none;
+                transition: all 0.3s ease-in-out;
+                user-select: none;
+                font-size: 13px;
+                }
+
+                .fancy::before {
+                content: " ";
+                width: 1.7rem;
+                height: 2px;
+                background: #355891;
+                top: 50%;
+                left: 1.5em;
+                position: absolute;
+                transform: translateY(-50%);
+                transform: translateX(230%);
+                transform-origin: center;
+                /*transition: background 0.3s linear, width 0.3s linear;*/
+                }
+
+                .fancy .text {
+                font-size: 1.125em;
+                line-height: 1.33333em;
+                padding-left: 2em;
+                display: block;
+                text-align: left;
+                transition: all 0.3s ease-in-out;
+                text-transform: lowercase;
+                text-decoration: none;
+                color: #355891;
+                transform: translateX(30%);
+                }
+
+                .fancy .top-key {
+                height: 2px;
+                width: 1.5625rem;
+                top: -2px;
+                left: 0.625rem;
+                position: absolute;
+                background: #355891;
+                transition: width 0.5s ease-out, left 0.3s ease-out;
+                }
+
+                .fancy .bottom-key-1 {
+                height: 2px;
+                width: 1.5625rem;
+                right: 1.875rem;
+                bottom: -2px;
+                position: absolute;
+                background: #355891;
+                transition: width 0.5s ease-out, right 0.3s ease-out;
+                }
+
+                .fancy .bottom-key-2 {
+                height: 2px;
+                width: 0.625rem;
+                right: 0.625rem;
+                bottom: -2px;
+                position: absolute;
+                background: #355891;
+                transition: width 0.5s ease-out, right 0.3s ease-out;
+                }
+
+                .fancy:hover {
+                color: #355891;
+                background: #5f82a9;
+                }
+
+                .fancy:hover::before {
+                width: 1.5rem;
+                background: #355891;
+                }
+
+                .fancy:hover .text {
+                color: white;
+                padding-left: 1.5em;
+                }
+
+                .fancy:hover .top-key {
+                left: -2px;
+                width: 0px;
+                }
+
+                .fancy:hover .bottom-key-1,
+                .fancy:hover .bottom-key-2 {
+                right: 0;
+                width: 0;
+                }
+
+                .carnivore-left-half {
+                    width: 50%;
+                    background-image: url('images/carnivore.jpg');
+                    background-size: cover;
+                }
+                .carnivore-right-half {
+                    width: 50%;
+                    padding: 10px;
+                }
+                p {
+                    font-family: 'Arial', sans-serif; /* Change the font to Arial. */
+                    font-size: 16px; /* Set the font size to 16 pixels. */
+                    line-height: 1.6; /* Set the space between lines. */
+                    color: #333; /* Set the text color. */
+                    margin-bottom: 20px; /* Add space below each paragraph. */
+                    text-align: justify; /* Align the text to both left and right margins. */
+                }
     </style>
 </head>
 <body>
-    <div id="header">Welcome to Our Website!</div>
+    <div id="header">Ryan Talbot</div>
     <div id="topbar">
         <button class="c-button c-button--gooey selected" onclick="showSubpage('About')">About
             <div class="c-button__blobs">
@@ -306,7 +525,14 @@
                 <div></div>
             </div>
         </button>
-        <button class="c-button c-button--gooey" onclick="showSubpage('Decathlon')">Decathlon
+        <button class="c-button c-button--gooey" onclick="showSubpage('Decathlon')">Decathlon Overview
+            <div class="c-button__blobs">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </button>
+        <button class="c-button c-button--gooey" onclick="showSubpage('Carnivore')">Carnivore Diet
             <div class="c-button__blobs">
                 <div></div>
                 <div></div>
@@ -320,7 +546,7 @@
                 <div></div>
             </div>
         </button>
-        <button class="c-button c-button--gooey" onclick="showSubpage('Sponsors')">Sponsors
+        <button class="c-button c-button--gooey" onclick="showSubpage('Contact')">Contact
             <div class="c-button__blobs">
                 <div></div>
                 <div></div>
@@ -336,7 +562,7 @@
         </div>
     
         <div id="timer">
-            <h2 id="session-length">You've been here for 0 seconds</h2>
+            <h3 id="session-length">You've been here for 0 seconds</h3>
             <ul id="events">
                 <!-- Decathlon events will be added here -->
             </ul>
@@ -346,7 +572,71 @@
             <!-- Events will be added here -->
         </div>
     </div>
+    <div id="Contact" class="subpage">
+        <form class="form">
+    
+            <div class="flex">
+                <label>
+                    <input class="input" type="text" placeholder="" required="">
+                    <span>first name</span>
+                </label>
+        
+                <label>
+                    <input class="input" type="text" placeholder="" required="">
+                    <span>last name</span>
+                </label>
+            </div>  
+                    
+            <label>
+                <input class="input" type="email" placeholder="" required="">
+                <span>email</span>
+            </label> 
+                
+            <label>
+                <input class="input" placeholder="" type="tel" required="">
+                <span>contact number</span>
+            </label>
+            <label>
+                <textarea class="input01" placeholder="" rows="3" required=""></textarea>
+                <span>message</span>
+            </label>
+            
+            <button href="#" class="fancy">
+              <span class="top-key"></span>
+              <span class="text">submit</span>
+              <span class="bottom-key-1"></span>
+              <span class="bottom-key-2"></span>
+            </button>
+        </form>
+    </div>
     <div id="Decathlon" class="subpage">
+        <div class="container">
+            <h1>The Decathlon: A Test of Athletic Prowess</h1>
+            
+            <h2>Origin of the Decathlon</h2>
+            <p>The decathlon developed from the ancient pentathlon competitions held at the ancient Greek Olympics. Pentathlons involved five disciplines – long jump, discus throw, javelin throw, sprint, and a wrestling match. Introduced in Olympia during 708 BC, this competition was extremely popular for many centuries. The modern decathlon first appeared at the 1912 Games. The name "decathlon" was formed, in analogy to the word "pentathlon", from Greek δέκα (déka, meaning "ten") and ἄθλος (áthlos, or ἄθλον, áthlon, meaning "contest" or "prize").</p>
+    
+            <h2>Recent History of the Decathlon</h2>
+            <p>The current official decathlon world record holder is Frenchman Kevin Mayer, who scored a total of 9,126 points at the 2018 Décastar in France.</p>
+    
+            <h2>Description of the Decathlon Events</h2>
+            <p>In modern athletics, the ten events are:</p>
+            <ul>
+                <li>100 metres: This is a sprint event. Athletes set up in starting blocks and sprint 100 meters to the finish line, while staying in their assigned lane.</li>
+                <li>Long jump: This is a horizontal jump for distance. It's one of the oldest athletic contests, dating back to the ancient Greek Olympics.</li>
+                <li>Shot put: Athletes throw a heavy spherical object as far as possible.</li>
+                <li>High jump: This is a track and field event in which competitors must jump unaided over a horizontal bar placed at measured heights without dislodging it.</li>
+                <li>400 metres: This is a sprint around the track in the stadium. One lap around the track covers the distance.</li>
+                <li>110 metres hurdles: This is a sprint race in which each athlete must clear ten hurdles that are evenly spaced along a straight course.</li>
+                <li>Discus throw: Athletes throw a heavy disc—called a discus—in an attempt to mark a farther distance than their competitors.</li>
+                <li>Pole vault: This is a track and field event in which a person uses a long flexible pole as an aid to jump over a bar.</li>
+                <li>Javelin throw: Athletes throw a spear-like object made of metal, fiberglass, or carbon fiber, with men's and women's competitions being held.</li>
+                <li>1500 metres: This is a premier middle-distance track event in athletics. The distance has been contested at the Summer Olympics since 1896 for men and since 1972 for women.</li>
+            </ul>
+    
+            <h2>Decathlon Events Split Over Two Days</h2>
+            <p>The vast majority of international and top-level men's decathlons are divided into a two-day competition. On the first day, athletes compete in a 100-meter dash, long jump, shot put, high jump, and 400-meter run. The second day includes 110-meter hurdles, discus throw, pole vault, javelin throw, and a 1,500-meter run.</p>
+        </div>
         <div class="container">
             <div class="left-half" id="events-container">
                 <div class="decathlon-header">
@@ -360,20 +650,49 @@
                 </div>
                 <!-- JavaScript will populate this container with lines -->
             </div>
+            <!-- Total score row -->
         </div>
-    
-        <!-- Total score row -->
         <div class="decathlon-total-score">
             Total Score: <span id="total-score">0</span>
         </div>
-    </div>
+        </div>
+        <div id="Carnivore" class="subpage">
+            <div class="container">
+                <div class="carnivore-left-half"></div>
+                <div class="carnivore-right-half">
+                    <p>Since his Junior year of college, Ryan has followed a strict carnivore diet consisting of almost exclusively meat and eggs.</p>
+
+                    <p>Here is one example of a daily diet for Ryan:
+                    <ul>
+                    <li>Breakfast: Six eggs and half a pound of ground beef.</li>
+                    <li>Lunch: Three half-pound burgers with a little bit of butter.</li>
+                    <li>Dinner: A steak and six eggs.</li>
+                    </ul>
+                    </p>
+
+                    <p>This means that he consumes roughly three pounds of meat and a dozen eggs daily. He sources his food from local farmers and sometimes purchases a whole cow at once, which is about 600 pounds of meat.</p>
+
+                    <p>Ryan's journey on the carnivore diet started when he felt he was not athletically performing to his standards. He decided to change his diet to help him reach a higher level of success. He believes that his diet has helped him recover faster from injuries and improve his performance. For instance, he won the Jim Click Shootout decathlon and the Big Ten Championship while following the carnivore diet.</p>
+
+                    <p>As you can see Ryan is exceptionally enthusiastic about his diet and believes in the results of it based on his personal success.</p>
+
+                    <p>Here are some quotes from Ryan regarding his diet:</p>
+                    <blockquote>
+                    <p>"I feel like I'm recovering faster from workouts."</p>
+                    <p>"I've noticed a significant improvement in my performance since I started this diet."</p>
+                    <p>"I believe this diet has helped me reach a higher level of success."</p>
+                    </blockquote>
+
+                </div>
+            </div>
+        </div>
     <div id="Upcoming Events" class="subpage">
         <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%2333B679&ctz=America%2FNew_York&mode=AGENDA&showTz=1&showCalendars=0&showTabs=0&showPrint=0&showNav=0&showTitle=1&title=Ryan's%20Upcoming%20Events&src=Zm1nbzRxZzAwNWtkY3VpbTMyZjg1NGo2cWRqYTYxZjdAaW1wb3J0LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%230B8043" style="border:solid 1px #777" width="90%" height="500px" frameborder="0" scrolling="no"></iframe>
     </div>
     <div id="Sponsors" class="subpage">This could be a sponsors page.</div>
 
     <div id="footer">
-        <p>Stay connected</p>
+        <h3>Follow along with Ryan's journey</h3>
         <div class="footer-links">
             <a href="https://www.instagram.com/_ryan_talbot_/" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/1024px-Instagram_icon.png" alt="Instagram"></a>
             <a href="https://msuspartans.com/sports/track-and-field/roster/ryan-talbot/13551"><img src = "images\msu_logo.jpg" alt="MSU"></a>
