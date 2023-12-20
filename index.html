@@ -3,20 +3,17 @@
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        #header {
-            height: 100px;
-            background-color: #f8f9fa;
-            padding: 20px;
-            text-align: center;
-            font-size: 200%;
-        }
-        
         #topbar {
             display: flex;
             justify-content: space-around;
-            background-color: #e9ecef;
             padding: 10px;
+            border-width: 10px; /*doesn't work so I kept padding*/
+            border-image: linear-gradient(to bottom right, black 0%, #001900 25%, #003200 50%, #004b00 75%, #006400 100%);
+            position: sticky; /* Add this line */
+            top: 0; /* Add this line */
+            z-index: 100; /* Optional: this ensures the navbar appears on top of other content */
         }
+
         #topbar button {
             width: 20%; 
             font-size: 150%;
@@ -29,6 +26,37 @@
         #events {
             font-size: 24px; 
         }
+        .header {
+            text-align: center;
+            padding: 20px;
+            color: darkgrey;
+            background: linear-gradient(to top right, black 0%, #001900 25%, #003200 50%, #004b00 75%, #006400 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 25vh;
+        }
+        .header h1 {
+            font-family: '1955', sans-serif;
+            font-size: 60px;
+            margin: 0;
+            text-shadow: 0 0 10px grey, 0 0 20px grey, 0 0 30px grey, 0 0 40px grey, 0 0 50px grey, 0 0 60px grey; /* Add initial glow */
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 20px grey, 0 0 30px grey, 0 0 40px grey, 0 0 50px grey, 0 0 60px grey;
+            }
+            to {
+                text-shadow: 0 0 30px green, 0 0 40px green, 0 0 50px green, 0 0 60px green, 0 0 70px green, 0 0 80px green; /* Increase glow */
+            }
+        }
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 30px;
+            }
+        }
+        
         .footer-links img {
             width: 75px;
             padding-inline: 10px;
@@ -209,6 +237,11 @@
         }
         .container {
                 display: flex;
+                flex-direction: column;
+            }
+            .row-container{
+                display: flex;
+                flex-direction: row;
             }
             .left-half {
                 width: 50%;
@@ -516,7 +549,7 @@
     </style>
 </head>
 <body>
-    <div id="header">Ryan Talbot</div>
+    <div class="header"><h1>RYAN TALBOT</h1></div>
     <div id="topbar">
         <button class="c-button c-button--gooey selected" onclick="showSubpage('About')">About
             <div class="c-button__blobs">
@@ -558,7 +591,6 @@
     <div id="About" class="subpage active">
         <div class="image-container">
             <img src="images\Team_USA_pics\flag_flex.jpg" alt="flag_flex.jpg">
-            <div class="overlay-text">Ryan Talbot at the Pan-Am Games in Chile</div>
         </div>
     
         <div id="timer">
@@ -613,31 +645,39 @@
         <div class="container">
             <h1>The Decathlon: A Test of Athletic Prowess</h1>
             
-            <h2>Origin of the Decathlon</h2>
-            <p>The decathlon developed from the ancient pentathlon competitions held at the ancient Greek Olympics. Pentathlons involved five disciplines – long jump, discus throw, javelin throw, sprint, and a wrestling match. Introduced in Olympia during 708 BC, this competition was extremely popular for many centuries. The modern decathlon first appeared at the 1912 Games. The name "decathlon" was formed, in analogy to the word "pentathlon", from Greek δέκα (déka, meaning "ten") and ἄθλος (áthlos, or ἄθλον, áthlon, meaning "contest" or "prize").</p>
+            <div id="origin">
+                <h2>Origin of the Decathlon</h2>
+                <p>The decathlon developed from the ancient pentathlon competitions held at the ancient Greek Olympics. Pentathlons involved five disciplines – long jump, discus throw, javelin throw, sprint, and a wrestling match. Introduced in Olympia during 708 BC, this competition was extremely popular for many centuries. The modern decathlon first appeared at the 1912 Games. The name "decathlon" was formed, in analogy to the word "pentathlon", from Greek δέκα (déka, meaning "ten") and ἄθλος (áthlos, or ἄθλον, áthlon, meaning "contest" or "prize").</p>
+            </div>
     
-            <h2>Recent History of the Decathlon</h2>
-            <p>The current official decathlon world record holder is Frenchman Kevin Mayer, who scored a total of 9,126 points at the 2018 Décastar in France.</p>
+            <div id="history">
+                <h2>Recent History of the Decathlon</h2>
+                <p>The current official decathlon world record holder is Frenchman Kevin Mayer, who scored a total of 9,126 points at the 2018 Décastar in France.</p>
+            </div>
     
-            <h2>Description of the Decathlon Events</h2>
-            <p>In modern athletics, the ten events are:</p>
-            <ul>
-                <li>100 metres: This is a sprint event. Athletes set up in starting blocks and sprint 100 meters to the finish line, while staying in their assigned lane.</li>
-                <li>Long jump: This is a horizontal jump for distance. It's one of the oldest athletic contests, dating back to the ancient Greek Olympics.</li>
-                <li>Shot put: Athletes throw a heavy spherical object as far as possible.</li>
-                <li>High jump: This is a track and field event in which competitors must jump unaided over a horizontal bar placed at measured heights without dislodging it.</li>
-                <li>400 metres: This is a sprint around the track in the stadium. One lap around the track covers the distance.</li>
-                <li>110 metres hurdles: This is a sprint race in which each athlete must clear ten hurdles that are evenly spaced along a straight course.</li>
-                <li>Discus throw: Athletes throw a heavy disc—called a discus—in an attempt to mark a farther distance than their competitors.</li>
-                <li>Pole vault: This is a track and field event in which a person uses a long flexible pole as an aid to jump over a bar.</li>
-                <li>Javelin throw: Athletes throw a spear-like object made of metal, fiberglass, or carbon fiber, with men's and women's competitions being held.</li>
-                <li>1500 metres: This is a premier middle-distance track event in athletics. The distance has been contested at the Summer Olympics since 1896 for men and since 1972 for women.</li>
-            </ul>
+            <div id="description">
+                <h2>Description of the Decathlon Events</h2>
+                <p>In modern athletics, the ten events are:</p>
+                <ul>
+                    <li>100 metres: This is a sprint event. Athletes set up in starting blocks and sprint 100 meters to the finish line, while staying in their assigned lane.</li>
+                    <li>Long jump: This is a horizontal jump for distance. It's one of the oldest athletic contests, dating back to the ancient Greek Olympics.</li>
+                    <li>Shot put: Athletes throw a heavy spherical object as far as possible.</li>
+                    <li>High jump: This is a track and field event in which competitors must jump unaided over a horizontal bar placed at measured heights without dislodging it.</li>
+                    <li>400 metres: This is a sprint around the track in the stadium. One lap around the track covers the distance.</li>
+                    <li>110 metres hurdles: This is a sprint race in which each athlete must clear ten hurdles that are evenly spaced along a straight course.</li>
+                    <li>Discus throw: Athletes throw a heavy disc—called a discus—in an attempt to mark a farther distance than their competitors.</li>
+                    <li>Pole vault: This is a track and field event in which a person uses a long flexible pole as an aid to jump over a bar.</li>
+                    <li>Javelin throw: Athletes throw a spear-like object made of metal, fiberglass, or carbon fiber, with men's and women's competitions being held.</li>
+                    <li>1500 metres: This is a premier middle-distance track event in athletics. The distance has been contested at the Summer Olympics since 1896 for men and since 1972 for women.</li>
+                </ul>
+            </div>
     
-            <h2>Decathlon Events Split Over Two Days</h2>
-            <p>The vast majority of international and top-level men's decathlons are divided into a two-day competition. On the first day, athletes compete in a 100-meter dash, long jump, shot put, high jump, and 400-meter run. The second day includes 110-meter hurdles, discus throw, pole vault, javelin throw, and a 1,500-meter run.</p>
+            <div id="split">
+                <h2>Decathlon Events Split Over Two Days</h2>
+                <p>The vast majority of international and top-level men's decathlons are divided into a two-day competition. On the first day, athletes compete in a 100-meter dash, long jump, shot put, high jump, and 400-meter run. The second day includes 110-meter hurdles, discus throw, pole vault, javelin throw, and a 1,500-meter run.</p>
+            </div>
         </div>
-        <div class="container">
+        <div class = "row-container">
             <div class="left-half" id="events-container">
                 <div class="decathlon-header">
                     Calculate a  decathlon score
@@ -657,7 +697,7 @@
         </div>
         </div>
         <div id="Carnivore" class="subpage">
-            <div class="container">
+            <div class="row-container">
                 <div class="carnivore-left-half"></div>
                 <div class="carnivore-right-half">
                     <p>Since his Junior year of college, Ryan has followed a strict carnivore diet consisting of almost exclusively meat and eggs.</p>
@@ -689,7 +729,6 @@
     <div id="Upcoming Events" class="subpage">
         <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%2333B679&ctz=America%2FNew_York&mode=AGENDA&showTz=1&showCalendars=0&showTabs=0&showPrint=0&showNav=0&showTitle=1&title=Ryan's%20Upcoming%20Events&src=Zm1nbzRxZzAwNWtkY3VpbTMyZjg1NGo2cWRqYTYxZjdAaW1wb3J0LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%230B8043" style="border:solid 1px #777" width="90%" height="500px" frameborder="0" scrolling="no"></iframe>
     </div>
-    <div id="Sponsors" class="subpage">This could be a sponsors page.</div>
 
     <div id="footer">
         <h3>Follow along with Ryan's journey</h3>
