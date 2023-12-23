@@ -3,15 +3,19 @@
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
+        body {
+            background: linear-gradient(to bottom, white, lightgrey);
+            margin: 0;
+        }
         #topbar {
             display: flex;
             justify-content: space-around;
-            padding: 10px;
+            
             border-width: 10px; /*doesn't work so I kept padding*/
             border-image: linear-gradient(to bottom right, black 0%, #001900 25%, #003200 50%, #004b00 75%, #006400 100%);
-            position: sticky; /* Add this line */
-            top: 0; /* Add this line */
-            z-index: 100; /* Optional: this ensures the navbar appears on top of other content */
+            position: sticky; 
+            top: 0;
+            z-index: 100; /*ensures the navbar appears on top of other content */
         }
 
         #topbar button {
@@ -19,7 +23,6 @@
             font-size: 150%;
         }
         #instagram, #timer, #footer {
-            background-color: #f8f9fa;
             text-align: center;
             padding: 20px;
         }
@@ -38,7 +41,7 @@
         }
         .header h1 {
             font-family: '1955', sans-serif;
-            font-size: 60px;
+            font-size: 80px;
             margin: 0;
             text-shadow: 0 0 10px grey, 0 0 20px grey, 0 0 30px grey, 0 0 40px grey, 0 0 50px grey, 0 0 60px grey; /* Add initial glow */
             animation: glow 3s ease-in-out infinite alternate;
@@ -140,80 +143,58 @@
         .c-button--gooey:hover .c-button__blobs div {
             transform: scale(1.4) translateY(0) translateZ(0);
         }
-        .timeline {
-            position: relative;
-            max-width: 1200px;
-            margin: 50px auto;
-            height: 130px;
+        #image-section {
+            width: 100%;
+            height: 75vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        .timeline::before {
+        #image {
+            width: auto;
+            height: 100%;
+            object-fit: cover;
+        }
+        #text-section, #timeline-section {
+            width: 100%;
+            height: 100px;
+            /*border: 1px solid black;*/
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #timeline {
+            position: relative;
+            margin-bottom: 200px;
+        }
+        #timeline::before {
             content: '';
             position: absolute;
-            width: 100%;
-            height: 2px;
-            background-color: black;
-            top: 50%; /* Adjust this value to move the black line */
+            top: calc(50% + 15px);
             left: 0;
+            width: 100%;
+            border-top: 5px solid black;
+        }
+        .fa {
+            cursor: pointer;
+            font-size: 48px;
         }
         .event {
             position: absolute;
-            bottom: 0;
-            width: 24px;
-            height: 24px;
+            top: 0;
             text-align: center;
         }
-        .event i {
-            position: relative;
-            top: 40px;
-            font-size: 24px;
-            transition: font-size 0.3s;
-            left: -10%;
+        #startYear, #currentYear{
+            font-weight: bold;
         }
-        .event:hover i {
-            font-size: 30px;
-        }
-        .event-title {
+        #startYear::before, #currentYear::after {
+            content: "|";
             position: absolute;
-            width: 100px;
-            left: -40px;
-            text-align: center;
-            bottom: 0px;
-        }
-        .event-date {
-            position: absolute;
-            width: 100px;
-            left: -40px;
-            text-align: center;
-            top: 60px;
-        }
-        .event-title span {
-            display: none;
-            position: absolute;
-            background-color: #555;
-            color: #fff;
-            text-align: center;
-            padding: 5px 0;
-            border-radius: 6px;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -60px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .event-title span::after {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -5px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: #555 transparent transparent transparent;
-        }
-        .event-title:hover span {
-            display: block;
-            opacity: 1;
+            width: 2px;
+            height: 15px;
+            background: black;
+            margin-top: 20px;
         }
         .image-container {
             position: relative;
@@ -235,53 +216,60 @@
         .no-bullet {
             list-style-type: none;
         }
-        .container {
-                display: flex;
-                flex-direction: column;
+        
+        .deacthlon-header {
+                font-size: 24px; /* Larger font size */
+                font-weight: bold; /* Make the text bold */
+                color: #333; /* Dark grey color for better readability */
+                text-align: center; /* Center the text */
+                padding: 20px; /* Add some padding around the text */
+                margin-bottom: 30px; /* Add some space below the header */
+                border-bottom: 2px solid #666; /* A subtle bottom border */
+                background-color: #f8f8f8; /* A light background color */
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* A soft shadow to lift the header */
+                border-radius: 5px; /* Rounded corners */
             }
-            .row-container{
+            .deacthlon {
                 display: flex;
-                flex-direction: row;
             }
-            .left-half {
+            .deacthlon-left-half {
                 width: 50%;
             }
-            .right-half {
+            .deacthlon-right-half {
                 width: 50%;
                 position: relative;
             }
-            .decathlon-event-row {
+            .deacthlon-event-row {
                 display: flex;
                 align-items: center;
                 margin-bottom: 10px;
             }
-            .decathlon-event-title {
+            .deacthlon-event-title {
                 flex: 2; 
             }
-            .decathlon-event-score {
-                width: 25%; /* Made 75% narrower */
+            .deacthlon-event-score {
+                width: 25%;
             }
-            .decathlon-event-units {
+            .deacthlon-event-units {
                 flex: 1;
                 margin-left: 10px;
             }
-            .decathlon-event-points {
+            .deacthlon-event-points {
                 flex: 1; 
                 text-align: right;
             }
-            .decathlon-total-score {
-                display: flex;
+            .deacthlon-total-score {
                 align-items: center;
                 margin-top: 20px;
                 margin-left: '100%';
                 font-weight: bold;
             }
-            .decathlon-line {
+            .deacthlon-line {
                 position: absolute;
                 height: 2px;
                 left: 0;
             }
-            .decathlon-input {
+            .deacthlon-input {
             max-width: 100px;
             padding: 12px;
             border: none;
@@ -291,7 +279,7 @@
             color: dimgray;
             }
 
-            .decathlon-input:invalid {
+            .deacthlon-input:invalid {
             animation: justshake 0.3s forwards;
             color: red;
             }
@@ -313,239 +301,148 @@
                 transform: translateX-(5px);
             }
             }
-            #visual-container {
+            #deacthlon-visual-container {
             position: relative;
             width: 100%; /* Full width of the container */
             height: 500px; /* Adjust the height as needed */
             overflow: hidden; /* Prevents content from spilling outside the container */
             }
-            .decathlon-header {
-                font-size: 24px; /* Larger font size */
-                font-weight: bold; /* Make the text bold */
-                color: #333; /* Dark grey color for better readability */
-                text-align: center; /* Center the text */
-                padding: 20px; /* Add some padding around the text */
-                margin-bottom: 30px; /* Add some space below the header */
-                border-bottom: 2px solid #666; /* A subtle bottom border */
-                background-color: #f8f8f8; /* A light background color */
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* A soft shadow to lift the header */
-                border-radius: 5px; /* Rounded corners */
+
+            .carnivore-left-half {
+                width: 50%;
+                background-image: url('images/carnivore.jpg');
+                background-size: cover;
             }
-            .form {
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-                max-width: 350px;
-                background-color: #355891;
-                padding: 20px;
-                border-radius: 10px;
-                position: relative;
-                }
+            .carnivore-right-half {
+                width: 50%;
+                padding: 10px;
+            }
+            p {
+                font-family: 'Arial', sans-serif; /* Change the font to Arial. */
+                font-size: 16px; /* Set the font size to 16 pixels. */
+                line-height: 1.6; /* Set the space between lines. */
+                color: #333; /* Set the text color. */
+                margin-bottom: 20px; /* Add space below each paragraph. */
+                text-align: justify; /* Align the text to both left and right margins. */
+            }
 
-                .message {
-                color: #355891;
-                font-size: 14px;
-                }
+            .contact-input {
+            padding: 24px;
+            border: none;
+            border-radius: 4px;
+            box-shadow: 2px 2px 7px 0 rgb(0, 0, 0, 0.2);
+            outline: none;
+            color: dimgray;
+            margin-bottom: 25px;
+        }
 
-                .flex {
-                display: flex;
-                width: 100%;
-                gap: 6px;
-                }
+        .contact-input.short {
+            max-width: 200px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
 
-                .form label {
-                position: relative;
-                }
+        .contact-input.long {
+            width: 400px;
+        }
 
-                .form label .input {
-                width: 100%;
-                padding: 10px 10px 20px 10px;
-                outline: 0;
-                border: 1px solid #355891;
-                border-radius: 5px;
-                }
+        .contact-input:invalid:focus:not(:placeholder-shown) {
+            animation: justshake 0.3s forwards;
+            color: red;
+        }
 
-                .form label .input + span {
-                position: absolute;
-                left: 10px;
-                top: 15px;
-                color: #355891;
-                font-size: 0.9em;
-                cursor: text;
-                transition: 0.3s ease;
-                }
+        @keyframes justshake {
+            25% {
+                transform: translateX(5px);
+            }
 
-                .form label .input:placeholder-shown + span {
-                top: 15px;
-                font-size: 0.9em;
-                }
+            50% {
+                transform: translateX(-5px);
+            }
 
-                .form label .input:focus + span,.form label .input:valid + span {
-                top: 30px;
-                font-size: 0.7em;
-                font-weight: 600;
-                }
+            75% {
+                transform: translateX(5px);
+            }
 
-                .form label .input:valid + span {
-                color: green;
-                }
+            100% {
+                transform: translateX(-5px);
+            }
+        }
 
-                .input01 {
-                width: 100%;
-                padding: 10px 10px 20px 10px;
-                outline: 0;
-                border: 1px solid #355891;
-                border-radius: 5px;
-                }
+        #contactForm {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
 
-                .form label .input01 + span {
-                position: absolute;
-                left: 10px;
-                top: 50px;
-                color: #355891;
-                font-size: 0.9em;
-                cursor: text;
-                transition: 0.3s ease;
-                }
+        #nameRow {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
 
-                .form label .input01:placeholder-shown + span {
-                top: 40px;
-                font-size: 0.9em;
-                }
+        .contact-btn:link,
+        .contact-btn:visited {
+            text-transform: uppercase;
+            text-decoration: none;
+            color: rgb(27, 27, 27);
+            padding: 10px 30px;
+            border: 1px solid;
+            border-radius: 1000px;
+            display: inline-block;
+            transition: all .2s;
+            position: relative;
+        }
 
-                .form label .input01:focus + span,.form label .input01:valid + span {
-                top: 50px;
-                font-size: 0.7em;
-                font-weight: 600;
-                }
+        .contact-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(27, 27, 27, .5);
+        }
 
-                .form label .input01:valid + span {
-                color: green;
-                }
+        .contact-btn:active {
+            transform: translateY(-3px);
+        }
 
-                .fancy {
-                background-color: white;
-                border: 2px solid #355891;
-                border-radius: 0px;
-                box-sizing: border-box;
-                color: #355891;
-                cursor: pointer;
-                display: inline-block;
-                font-weight: 390;
-                letter-spacing: 2px;
-                margin: 0;
-                outline: none;
-                overflow: visible;
-                padding: 8px 30px;
-                position: relative;
-                text-align: center;
-                text-decoration: none;
-                text-transform: none;
-                transition: all 0.3s ease-in-out;
-                user-select: none;
-                font-size: 13px;
-                }
+        .contact-btn::after {
+            content: "";
+            display: inline-block;
+            height: 100%;
+            width: 100%;
+            border-radius: 100px;
+            top: 0;
+            left: 0;
+            position: absolute;
+            z-index: -1;
+            transition: all .3s;
+        }
 
-                .fancy::before {
-                content: " ";
-                width: 1.7rem;
-                height: 2px;
-                background: #355891;
-                top: 50%;
-                left: 1.5em;
-                position: absolute;
-                transform: translateY(-50%);
-                transform: translateX(230%);
-                transform-origin: center;
-                /*transition: background 0.3s linear, width 0.3s linear;*/
-                }
+        .contact-btn:hover::after {
+            background-color: rgb(32, 128, 64);
+            transform: scaleX(1.4) scaleY(1.5);
+            opacity: 0;
+        }
+        .autoExpand {
+            overflow-y: hidden;
+            resize: none;
+        }
 
-                .fancy .text {
-                font-size: 1.125em;
-                line-height: 1.33333em;
-                padding-left: 2em;
-                display: block;
-                text-align: left;
-                transition: all 0.3s ease-in-out;
-                text-transform: lowercase;
-                text-decoration: none;
-                color: #355891;
-                transform: translateX(30%);
-                }
+        .statistics-section {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 20px; 
+        }
 
-                .fancy .top-key {
-                height: 2px;
-                width: 1.5625rem;
-                top: -2px;
-                left: 0.625rem;
-                position: absolute;
-                background: #355891;
-                transition: width 0.5s ease-out, left 0.3s ease-out;
-                }
-
-                .fancy .bottom-key-1 {
-                height: 2px;
-                width: 1.5625rem;
-                right: 1.875rem;
-                bottom: -2px;
-                position: absolute;
-                background: #355891;
-                transition: width 0.5s ease-out, right 0.3s ease-out;
-                }
-
-                .fancy .bottom-key-2 {
-                height: 2px;
-                width: 0.625rem;
-                right: 0.625rem;
-                bottom: -2px;
-                position: absolute;
-                background: #355891;
-                transition: width 0.5s ease-out, right 0.3s ease-out;
-                }
-
-                .fancy:hover {
-                color: #355891;
-                background: #5f82a9;
-                }
-
-                .fancy:hover::before {
-                width: 1.5rem;
-                background: #355891;
-                }
-
-                .fancy:hover .text {
-                color: white;
-                padding-left: 1.5em;
-                }
-
-                .fancy:hover .top-key {
-                left: -2px;
-                width: 0px;
-                }
-
-                .fancy:hover .bottom-key-1,
-                .fancy:hover .bottom-key-2 {
-                right: 0;
-                width: 0;
-                }
-
-                .carnivore-left-half {
-                    width: 50%;
-                    background-image: url('images/carnivore.jpg');
-                    background-size: cover;
-                }
-                .carnivore-right-half {
-                    width: 50%;
-                    padding: 10px;
-                }
-                p {
-                    font-family: 'Arial', sans-serif; /* Change the font to Arial. */
-                    font-size: 16px; /* Set the font size to 16 pixels. */
-                    line-height: 1.6; /* Set the space between lines. */
-                    color: #333; /* Set the text color. */
-                    margin-bottom: 20px; /* Add space below each paragraph. */
-                    text-align: justify; /* Align the text to both left and right margins. */
-                }
+        .track-event {
+        flex: 0 0 50%;
+        margin-bottom: 20px; 
+        }
+    
+    .highScore-animate {
+      font-size: 24px;
+      font-weight: bold;
+    }
     </style>
 </head>
 <body>
@@ -599,46 +496,80 @@
                 <!-- Decathlon events will be added here -->
             </ul>
         </div>
+
+        <div id="about-text">
+            <h1>Background</h1>
+            <p>Ryan Talbot is an American track and field athlete who competes in the Decathlon. Born on October 7, 2000, he hails from Alto, Michigan, and attended Forest Hills Central in Grand Rapids, Michigan. His mother, Sally Talbot (née Clark), was a Michigan State track heptathlete.</p>
+
+            <p>In May 2022, Talbot won the Big Ten Conference decathlon with a Michigan State University school record. He was selected to compete for America at the 2023 Pan American Games. He won the bronze medal in the decathlon at the event in Santiago, Chile, in November 2023. His personal best in Decathlon is 8064, which he achieved in Minneapolis in 2022.</p>
+
+            <p>Talbot's diet is unique. He follows a carnivore diet, consuming only meat, eggs, and butter. For daily eating habits, he usually eats six eggs and half a pound of ground beef for breakfast, lunch is three half-pound burgers with a little bit of butter, and dinner is a steak and six eggs. This means Talbot consumes roughly three pounds of meat and a dozen eggs daily. He sources his food from local farmers and buys grass-fed ground beef in large quantities.</p>
+
+            <p>Talbot's journey in the carnivore diet originated two years ago during his junior year when he felt he was not performing to his standards. He decided the change in his diet will help him reach a higher level of success. He believed that he needed to eat carbs all the time. However, after going carnivore, he started feeling really good. His hamstring injuries completely went away, and recovery was way faster than normal. He competed the next day and won the Jim Click Shootout decathlon, went to Big Ten’s, and won that year as well, all while not eating carbohydrates.</p>
+
+            <p>According to his World Athletics profile, his current world ranking positions are as follows:</p>
+            <ul>
+            <li>Men's Decathlon: 85</li>
+            <li>Men's Discus Throw: 440</li>
+            <li>Men's Shot Put: 750</li>
+            <li>Men's 110mH: 841</li>
+            <li>Men's 400m: 1066</li>
+            <li>Men's 100m: 2339</li>
+            <li>Men's Overall Ranking: 2906</li>
+            </ul>
+
+            <p>His highest world ranking positions are:</p>
+            <ul>
+            <li>Men's Decathlon: 67</li>
+            <li>Men's Pole Vault: 290</li>
+            <li>Men's Discus Throw: 440</li>
+            <li>Men's Shot Put: 750</li>
+            <li>Men's 110mH: 824</li>
+            <li>Men's 400m: 1066</li>
+            <li>Men's 100m: 1756</li>
+            <li>Men's Overall Ranking: 2157</li>
+            </ul>
+
+            <p>His all-time personal top competitions are:</p>
+            <ul>
+            <li>Big Ten Ch., University of Minnesota T&F Stadium, Minneapolis, MN USA: 8064 Decathlon</li>
+            <li>Big Ten Conference Outdoor Track & Field Championships, Billy Hayes T& F Complex, Bloomington, IN USA: 7786 Decathlon</li>
+            <li>Pan American Games, Santiago de Chile CHI: 7742 Decathlon</li>
+            <li>Jim Click Shootout & Multis, Univ. of Arizona Roy P. Drachman Stadium, Tucson, AZ USA: 7677 Decathlon</li>
+            <li>USA Championships, Hayward Field, Eugene, OR USA: 7532 Decathlon</li>
+            <li>NCAA Division I Outdoor Championships, Mike A. Myers Stadium, Austin, TX USA: 7488 Decathlon</li>
+            </ul>
+
+            <p>For more detailed information, you can visit his <a href="https://www.worldathletics.org/athletes/united-states/ryan-talbot-14889963">Wikipedia page</a> or his <a href="https://www.worldathletics.org/athletes/united-states/ryan-talbot-14889963">World Athletics profile</a>.</p>
+        </div>
     
-        <div class="timeline" id="timeline">
-            <!-- Events will be added here -->
+        <div id="image-section">
+            <img id="image" src="" alt="Image description">
+        </div>
+        <div id="text-section">
+            <p id="text"></p>
+        </div>
+        <div>
+            <h1>Timeline of Ryan's career:</h1>
+            <p>(click for more details)</p>
+            <div id="yearDiv" style="display: flex; justify-content: space-between;">
+                <span id="startYear">2015</span>
+                <span id="currentYear"></span>
+            </div>
+        </div>
+        <div id="timeline">
+            <!-- Timeline items will be added here by JavaScript -->
         </div>
     </div>
     <div id="Contact" class="subpage">
-        <form class="form">
-    
-            <div class="flex">
-                <label>
-                    <input class="input" type="text" placeholder="" required="">
-                    <span>first name</span>
-                </label>
-        
-                <label>
-                    <input class="input" type="text" placeholder="" required="">
-                    <span>last name</span>
-                </label>
-            </div>  
-                    
-            <label>
-                <input class="input" type="email" placeholder="" required="">
-                <span>email</span>
-            </label> 
-                
-            <label>
-                <input class="input" placeholder="" type="tel" required="">
-                <span>contact number</span>
-            </label>
-            <label>
-                <textarea class="input01" placeholder="" rows="3" required=""></textarea>
-                <span>message</span>
-            </label>
-            
-            <button href="#" class="fancy">
-              <span class="top-key"></span>
-              <span class="text">submit</span>
-              <span class="bottom-key-1"></span>
-              <span class="bottom-key-2"></span>
-            </button>
+        <form id="contactForm">
+            <div id="nameRow">
+                <input class="contact-input short" type="text" id="firstName" placeholder="First Name" pattern="[^0-9]*" required>
+                <input class="contact-input short" type="text" id="lastName" placeholder="Last Name" pattern="[^0-9]*" required>
+            </div>
+            <input class="contact-input long" type="email" id="email" placeholder="Email" required>
+            <textarea class="contact-input long autoExpand" id="message" placeholder="Message" required></textarea>
+            <a href="#" class="contact-btn">Submit</a>
         </form>
     </div>
     <div id="Decathlon" class="subpage">
@@ -671,6 +602,14 @@
                     <li>1500 metres: This is a premier middle-distance track event in athletics. The distance has been contested at the Summer Olympics since 1896 for men and since 1972 for women.</li>
                 </ul>
             </div>
+
+            <div class="content">
+                <h1>Ryan's Personal Records</h1>
+                <p>These are the event scores from Ryan's current best decathlon performance:</p>
+            </div>
+            <div class="statistics-section">
+                <!-- The track-event divs will be created here by your JavaScript -->
+            </div>
     
             <div id="split">
                 <h2>Decathlon Events Split Over Two Days</h2>
@@ -678,22 +617,22 @@
             </div>
         </div>
         <div class = "row-container">
-            <div class="left-half" id="events-container">
-                <div class="decathlon-header">
-                    Calculate a  decathlon score
+            <div class="deacthlon-left-half" id="deacthlon-events-container">
+                <div class="deacthlon-header">
+                    Calculate your scores
                 </div>
                 <!-- JavaScript will populate this container with event rows -->
             </div>
-            <div class="right-half" id="visual-container">
-                <div class="decathlon-header">
+            <!--<div class="deacthlon-right-half" id="deacthlon-visual-container">
+                <div class="deacthlon-header">
                     Compare <span style="color: red;">your score</span> to <span style="color: green;">Ryan's best</span> and the <span style="color: blue;">world record</span>
                 </div>
-                <!-- JavaScript will populate this container with lines -->
-            </div>
-            <!-- Total score row -->
+                 JavaScript will populate this container with lines 
+            </div>-->
         </div>
+            <!-- Total score row -->
         <div class="decathlon-total-score">
-            Total Score: <span id="total-score">0</span>
+            Total Score: <span id="decathlon-total-score">0</span>
         </div>
         </div>
         <div id="Carnivore" class="subpage">
@@ -726,7 +665,7 @@
                 </div>
             </div>
         </div>
-    <div id="Upcoming Events" class="subpage">
+    <div id="Upcoming Events" class="subpage" style="justify-content: center;">
         <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%2333B679&ctz=America%2FNew_York&mode=AGENDA&showTz=1&showCalendars=0&showTabs=0&showPrint=0&showNav=0&showTitle=1&title=Ryan's%20Upcoming%20Events&src=Zm1nbzRxZzAwNWtkY3VpbTMyZjg1NGo2cWRqYTYxZjdAaW1wb3J0LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%230B8043" style="border:solid 1px #777" width="90%" height="500px" frameborder="0" scrolling="no"></iframe>
     </div>
 
@@ -749,277 +688,6 @@
         </defs>
     </svg>
 
-    <script>
-        //100m, long jump, shot put, high jump, 400m, 110m hurdles, discus, pole vault, javelin, 1500m
-        var trackEvents = [
-            {title: '100m', A: 25.4347, B: 18, C: 1.81, isTimed: true, day1: true, highScore: 10.6, points: 952, worldRecord: 10.55, WRpoints: 963},
-            {title: 'Long Jump', A: 0.14354, B: 220, C: 1.4, isTimed: false, day1: true, highScore: 689, points: 788, worldRecord: 780, WRpoints: 1010},
-            {title: 'Shot Put', A: 51.39, B: 1.5, C: 1.05, isTimed: false, day1: true, highScore: 15.14, points: 798, worldRecord: 16.00, WRpoints: 851},
-            {title: 'High Jump', A: 0.8465, B: 75, C: 1.42, isTimed: false, day1: true, highScore: 191, points: 723, worldRecord: 2.05, WRpoints: 850},
-            {title: '400m', A: 1.53775, B: 82, C: 1.81, isTimed: true, day1: true, highScore: 47.52, points: 933, worldRecord: 48.42, WRpoints: 889},
-            {title: '110m Hurdles', A: 5.74352, B: 28.5, C: 1.92, isTimed: true, day1: false, highScore: 14.71, points: 885, worldRecord: 13.75, WRpoints: 1007},
-            {title: 'Discus', A: 12.91, B: 4, C: 1.1, isTimed: false, day1: false, highScore: 50.66, points: 884, worldRecord: 50.54, WRpoints: 882},
-            {title: 'Pole Vault', A: 0.2797, B: 100, C: 1.35, isTimed: false, day1: false, highScore: 5.2, points: 972, worldRecord: 545, WRpoints: 1051},
-            {title: 'Javelin', A: 10.14, B: 7, C: 1.08, isTimed: false, day1: false, highScore: 58.18, points: 710, worldRecord: 71.90, WRpoints: 918},
-            {title: '1500m', A: 0.03768, B: 480, C: 1.85, isTimed: true, day1: false, highScore: 280.73, points: 676, worldRecord: 276.11, WRpoints: 705},
-        ];
-
-        var events = [
-            {title: '11/23', description: 'Ryan placed 3rd at the Pan-American Games hosted in Chile', symbol: 'fas fa-medal', date: 2023, color: '#cd7f32'},
-            {title: '5/22', description: 'Ryan won the decathlon event at the Big Ten conference championship and set a new MSU record of 8064', symbol: 'fas fa-medal', date: 2022, color: 'gold'},
-            {title: '2/19', description: 'Ryan broke his own pole vault record for the last time in high school and won the indoor state meet with a height of 16\'0"', symbol: 'fas fa-medal', date: 2019, color: 'gold'},
-            {title: '12/18', description: 'Ryan committed to the MSU track and field team', symbol: 'fas graduate-cap', date: 2018, color: 'darkgreen'},
-            {title: '4/16', description: 'Ryan set the Forest Hils Central High School record for pole vault at 13\'2"', symbol: 'fas person-walking', date: 2016, color: 'green'},
-        ];
-
-        function showSubpage(pageId) {
-            var subpages = document.getElementsByClassName('subpage');
-            for (var i = 0; i < subpages.length; i++) {
-                subpages[i].classList.remove('active');
-            }
-            document.getElementById(pageId).classList.add('active');
-
-            var buttons = document.getElementsByTagName('button');
-            for (var i = 0; i < buttons.length; i++) {
-                buttons[i].classList.remove('selected');
-            }
-            document.querySelector(`button[onclick="showSubpage('${pageId}')"]`).classList.add('selected');
-            if(pageId === 'Decathlon'){
-                createEventRows();
-                setSameHeight();
-            }
-        }
-
-        function calculateTrackEventScore(score, event) {
-            return event.isTimed ? Math.round(event.A * Math.pow((event.B - score), event.C)) : Math.round(event.A * Math.pow((score - event.B), event.C));
-        }
-
-
-        var sessionStart = Date.now(); // Initialize sessionStart when the user loads the website
-
-        function addEvent(event) {
-            var timeline = document.getElementById('timeline');
-            var eventElement = document.createElement('div');
-            eventElement.className = 'event';
-            eventElement.style.left = ((event.date - 2000) / 25 * 100) + '%';
-            eventElement.innerHTML = '<i class="' + event.symbol + '" style="color: ' + event.color + ';"></i><div class="event-title">' + event.title + '<span>' + event.description + '</span></div><div class="event-date">' + event.date + '</div>';
-            timeline.appendChild(eventElement);
-        }
-
-        var trackEventsElement = document.getElementById('events');
-        function addTrackEvent(trackEvent, index) {
-            var trackEventElement = document.createElement('li');
-            trackEventElement.className = "no-bullet";
-            trackEventElement.id = 'trackEvent-' + index;
-            trackEventElement.textContent = '';
-            trackEventsElement.appendChild(trackEventElement);
-        }
-
-        var sortedTrackEvents = trackEvents.slice().sort((a, b) => a.highScore - b.highScore);
-        var timedEvents = sortedTrackEvents.filter(event => event.isTimed);
-        var addedEvents = [];
-        var combinedHighScore = 999;
-        var combined = true;
-        function updateTimerAndTrackEvents() {
-
-            // Update timer 
-            var timerElement = document.getElementById('session-length');
-            var textbox = document.getElementById('events');
-            var sessionLength = Math.floor((Date.now() - sessionStart) / 1000);
-            var seconds = sessionLength % 60;
-            var minutes = Math.floor(sessionLength / 60);
-
-            timerElement.textContent = String('You\'ve been here for ' + (minutes > 0 ? minutes + ' minute' + (minutes > 1 ? 's ' : ' ') + (seconds > 0 ? ' and ' + seconds + ' seconds' : '') : seconds + ' second' + (seconds  > 1 ? 's' : '')));
-
-            // Check track events
-            timedEvents.forEach((event, index) => {
-
-                // Check event condition
-                if (sessionLength > event.highScore && !addedEvents.includes(event)) {
-                    var textbox = document.getElementById('events');
-                    var eventListStr = '';
-                    addedEvents.push(event);
-                    combinedHighScore = addedEvents.reduce((total, currentEvent) => total + currentEvent.highScore, 0);
-                    combined = false;
-
-                    if (addedEvents.length === 1) eventListStr = addedEvents[0].title;
-                    else if (addedEvents.length === 2) eventListStr = addedEvents.map(e => e.title).join(' and ');
-                    else eventListStr = addedEvents.slice(0, -1).map(e => e.title).join(', ') + ', and ' + addedEvents.slice(-1)[0].title;
-
-                    textbox.textContent = 'You have been on this site longer than it takes Ryan to run the ' + eventListStr;
-                } 
-                if (sessionLength > combinedHighScore && addedEvents.length > 1 && !combined) {
-                    document.getElementById('events').textContent += ' combined';
-                    combined = true;
-                }
-            });
-        }
-
-        function calculateTrackEventScore(score, event) {
-            return event.isTimed ? event.A * Math.pow((event.B - score), event.C) : event.A * Math.pow((score - event.B), event.C);
-        }
-    
-        // Function to update points and units for an event
-        function updateEventPoints(index) {
-            var scoreInput = document.getElementById('score-' + index);
-            var score = parseFloat(scoreInput.value);
-            var event = trackEvents[index];
-            updateUnits(index, score); // Update units based on score
-            if(score < 100 && (index === 1 || index === 3 || index === 7)) score *= 100; //convert m to cm for jumps
-            var points = calculateTrackEventScore(score, event);
-            var pointsElement = document.getElementById('points-' + index);
-            pointsElement.textContent = Math.floor(points); // Display rounded points
-            updateTotalScore(); // Update the total score after changing points
-            drawLines(scoreInput, points, trackEvents[index].points, trackEvents[index].WRpoints);
-        }
-    
-        // Function to update units based on score
-        function updateUnits(index, score) {
-            var unitsElement = document.getElementById('units-' + index);
-            var event = trackEvents[index];
-            if (!event.isTimed) {
-                unitsElement.textContent = score < 100 ? 'Meters' : 'Centimeters';
-            }
-        }
-    
-        // Function to calculate and update the total score
-        function updateTotalScore() {
-            var totalScore = 0;
-            trackEvents.forEach(function(event, index) {
-            // Get the actual number value of the points
-            var points = document.getElementById('points-' + index).textContent;
-            var numericPoints = parseFloat(points);
-            totalScore += numericPoints;
-            });
-            scoreText = document.getElementById('total-score');
-            scoreText.textContent = totalScore;
-            drawLines(scoreText, totalScore, 8321, 9126);
-        }
-    
-        // Function to create event rows
-        function createEventRows() {
-        var eventsContainer = document.getElementById('events-container');
-        trackEvents.forEach(function(event, index) {
-        var eventRow = document.createElement('div');
-        eventRow.classList.add('event-row');
-        var initialUnitsText = event.isTimed ? 'Seconds' : 'm or cm'; // Set initial units text based on isTimed
-        eventRow.innerHTML = `
-        <div class="decathlon-event-title">${event.title}</div>
-        <input type="text" class="decathlon-input" id="score-${index}" oninput=updateEventPoints(${index}); pattern="\\d+(\\.\\d*)?" placeholder="Score">
-        <div class="decathlon-event-units" id="units-${index}">${initialUnitsText}</div>
-        <div class="decathlon-event-points" id="points-${index}">${event.points}</div>
-        `;
-        eventsContainer.appendChild(eventRow);
-        });
-        }
-
-        function setSameHeight() {
-            var leftColumn = document.getElementById('events-container');
-            var otherDiv = document.getElementById('visual-container');
-            var leftColumnHeight = leftColumn.offsetHeight; // Get the height of the left-column div
-            otherDiv.style.height = leftColumnHeight + 'px'; // Set the height of the other div to match
-        }
-        
-        function getUserScore(eventIndex) {
-
-        var scoreInput = document.getElementById('score-' + index);
-        return parseFloat(scoreInput.value); 
-        }
-
-        function drawLines(inputElement, value1, value2, value3) {
-        // 'inputElement' is the HTML element of the input box
-
-        // Get the bounding rectangle of the input element
-        const rect = inputElement.getBoundingClientRect();
-
-        // Use the top property of the bounding rectangle as the height
-        // Add window.scrollY to account for any scrolling
-        const inputHeight = rect.top + window.scrollY;
-
-        // Find the maximum score to set the longest line's length
-        const maxScore = Math.max(value1, value2, value3);
-
-        // Calculate the relative lengths of the lines
-        const length1 = (value1 / maxScore) * 100;
-        const length2 = (value2 / maxScore) * 100;
-        const length3 = (value3 / maxScore) * 100;
-
-        // Get the container where the lines will be drawn
-        const visualization = document.getElementById('visual-container');
-
-        // Create a container for the lines at the specified height
-        const lineContainer = document.createElement('div');
-        lineContainer.style.position = 'absolute';
-        lineContainer.style.top = (inputHeight - 250) + 'px'; // Set the top position to the input box's height
-        lineContainer.style.width = '50%'; // Set the width to half of the screen
-        lineContainer.style.left = '10%' //padding
-        lineContainer.style.height = '20px'; // Height of the line
-
-        // Function to create a line with gradient and hover effect
-        function createLine(length, color) {
-            const line = document.createElement('div');
-            line.style.width = length + '%';
-            line.style.height = '100%';
-            line.style.backgroundColor = color;
-            line.style.position = 'absolute';
-            line.style.borderRadius = '10px'; // Rounded edges
-            line.style.backgroundImage = 'linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.5))'; // Gradient effect
-
-            // Create a span element for the score value
-            const scoreValue = document.createElement('span');
-            scoreValue.textContent = length.toFixed(1) + '%'; // Display the percentage value
-            scoreValue.style.position = 'absolute';
-            scoreValue.style.left = '100%'; 
-            scoreValue.style.marginLeft = '5px';
-            scoreValue.style.visibility = 'hidden'; // Hide by default
-            line.appendChild(scoreValue);
-
-            // Add hover effect to show score value
-            line.addEventListener('mouseenter', function() {
-            scoreValue.style.visibility = 'visible';
-            });
-            line.addEventListener('mouseleave', function() {
-            scoreValue.style.visibility = 'hidden';
-            });
-
-            return line;
-        }
-
-        // Create and append lines to the container
-        if(length1 >= length2 && length1 >= length3){
-            lineContainer.appendChild(createLine(length1, 'red'));
-            if(length2 >= length3){
-                lineContainer.appendChild(createLine(length2, 'green'));
-                lineContainer.appendChild(createLine(length3, 'blue'));
-            } else {
-                lineContainer.appendChild(createLine(length3, 'blue'));
-                lineContainer.appendChild(createLine(length2, 'green'));
-            }
-        } else if(length2 >= length1 && length2 >= length3){
-            lineContainer.appendChild(createLine(length2, 'green'));
-            if (length1 >= length3){
-                lineContainer.appendChild(createLine(length1, 'red'));
-                lineContainer.appendChild(createLine(length3, 'blue'));
-            } else {
-                lineContainer.appendChild(createLine(length3, 'blue'));
-                lineContainer.appendChild(createLine(length1, 'red'));
-            }
-        } else {
-            lineContainer.appendChild(createLine(length3, 'blue'));
-            if(length1 >= length2){
-                lineContainer.appendChild(createLine(length1, 'red'));
-                lineContainer.appendChild(createLine(length2, 'green'));
-            } else {
-                lineContainer.appendChild(createLine(length2, 'green'));
-                lineContainer.appendChild(createLine(length1, 'red'));
-            }
-        }
-        visualization.appendChild(lineContainer);
-        }
-
-        events.forEach(addEvent);
-        timedEvents.forEach(addTrackEvent);
-        setInterval(updateTimerAndTrackEvents, 1000);
-    </script>
+    <script src="js/main.js"></script>
 </body>
 </html>

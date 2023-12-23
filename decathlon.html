@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Decathlon Scores</title>
         <style>
-            .header {
+            .deacthlon-header {
                 font-size: 24px; /* Larger font size */
                 font-weight: bold; /* Make the text bold */
                 color: #333; /* Dark grey color for better readability */
@@ -17,48 +17,48 @@
                 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* A soft shadow to lift the header */
                 border-radius: 5px; /* Rounded corners */
             }
-            .container {
+            .deacthlon-container {
                 display: flex;
             }
-            .left-half {
+            .deacthlon-left-half {
                 width: 50%;
             }
-            .right-half {
+            .deacthlon-right-half {
                 width: 50%;
                 position: relative;
             }
-            .event-row {
+            .deacthlon-event-row {
                 display: flex;
                 align-items: center;
                 margin-bottom: 10px;
             }
-            .event-title {
+            .deacthlon-event-title {
                 flex: 2; 
             }
-            .event-score {
-                width: 25%; /* Made 75% narrower */
+            .deacthlon-event-score {
+                width: 25%;
             }
-            .event-units {
+            .deacthlon-event-units {
                 flex: 1;
                 margin-left: 10px;
             }
-            .event-points {
+            .deacthlon-event-points {
                 flex: 1; 
                 text-align: right;
             }
-            .total-score {
+            .deacthlon-total-score {
                 display: flex;
                 align-items: center;
                 margin-top: 20px;
                 margin-left: '100%';
                 font-weight: bold;
             }
-            .line {
+            .deacthlon-line {
                 position: absolute;
                 height: 2px;
                 left: 0;
             }
-            .input {
+            .deacthlon-input {
             max-width: 100px;
             padding: 12px;
             border: none;
@@ -68,7 +68,7 @@
             color: dimgray;
             }
 
-            .input:invalid {
+            .deacthlon-input:invalid {
             animation: justshake 0.3s forwards;
             color: red;
             }
@@ -90,7 +90,7 @@
                 transform: translateX-(5px);
             }
             }
-            #visual-container {
+            #deacthlon-visual-container {
             position: relative;
             width: 100%; /* Full width of the container */
             height: 500px; /* Adjust the height as needed */
@@ -100,15 +100,15 @@
     </head>
 <body>
 
-    <div class="container">
-        <div class="left-half" id="events-container">
-            <div class="header">
+    <div class="deacthlon-container">
+        <div class="deacthlon-left-half" id="deacthlon-events-container">
+            <div class="deacthlon-header">
                 Calculate your scores
             </div>
             <!-- JavaScript will populate this container with event rows -->
         </div>
-        <div class="right-half" id="visual-container">
-            <div class="header">
+        <div class="deacthlon-right-half" id="deacthlon-visual-container">
+            <div class="deacthlon-header">
                 Compare <span style="color: red;">your score</span> to <span style="color: green;">Ryan's best</span> and the <span style="color: blue;">world record</span>
             </div>
             <!-- JavaScript will populate this container with lines -->
@@ -116,8 +116,8 @@
     </div>
 
     <!-- Total score row -->
-    <div class="total-score">
-        Total Score: <span id="total-score">0</span>
+    <div class="deacthlon-total-score">
+        Total Score: <span id="deacthlon-total-score">0</span>
     </div>
 
     <script>
@@ -129,13 +129,13 @@
     
         // Function to update points and units for an event
         function updateEventPoints(index) {
-            var scoreInput = document.getElementById('score-' + index);
+            var scoreInput = document.getElementById('deacthlon-score-' + index);
             var score = parseFloat(scoreInput.value);
             var event = trackEvents[index];
             updateUnits(index, score); // Update units based on score
             if(score < 100 && (index === 1 || index === 3 || index === 7)) score *= 100; //convert m to cm for jumps
             var points = calculateTrackEventScore(score, event);
-            var pointsElement = document.getElementById('points-' + index);
+            var pointsElement = document.getElementById('deacthlon-points-' + index);
             pointsElement.textContent = Math.floor(points); // Display rounded points
             updateTotalScore(); // Update the total score after changing points
             drawLines(scoreInput, points, trackEvents[index].points, trackEvents[index].WRpoints);
@@ -143,7 +143,7 @@
     
         // Function to update units based on score
         function updateUnits(index, score) {
-            var unitsElement = document.getElementById('units-' + index);
+            var unitsElement = document.getElementById('deacthlon-units-' + index);
             var event = trackEvents[index];
             if (!event.isTimed) {
                 unitsElement.textContent = score < 100 ? 'Meters' : 'Centimeters';
@@ -155,42 +155,42 @@
             var totalScore = 0;
             trackEvents.forEach(function(event, index) {
             // Get the actual number value of the points
-            var points = document.getElementById('points-' + index).textContent;
+            var points = document.getElementById('deacthlon-points-' + index).textContent;
             var numericPoints = parseFloat(points);
             totalScore += numericPoints;
             });
-            scoreText = document.getElementById('total-score');
+            scoreText = document.getElementById('deacthlon-total-score');
             scoreText.textContent = totalScore;
             drawLines(scoreText, totalScore, 8321, 9126);
         }
     
         // Function to create event rows
         function createEventRows() {
-        var eventsContainer = document.getElementById('events-container');
+        var eventsContainer = document.getElementById('deacthlon-events-container');
         trackEvents.forEach(function(event, index) {
         var eventRow = document.createElement('div');
-        eventRow.classList.add('event-row');
+        eventRow.classList.add('deacthlon-event-row');
         var initialUnitsText = event.isTimed ? 'Seconds' : 'm or cm'; // Set initial units text based on isTimed
         eventRow.innerHTML = `
-        <div class="event-title">${event.title}</div>
-        <input type="text" class="input" id="score-${index}" oninput=updateEventPoints(${index}); pattern="\\d+(\\.\\d*)?" placeholder="Score">
-        <div class="event-units" id="units-${index}">${initialUnitsText}</div>
-        <div class="event-points" id="points-${index}">${event.points}</div>
+        <div class="deacthlon-event-title">${event.title}</div>
+        <input type="text" class="deacthlon-input" id="deacthlon-score-${index}" oninput=updateEventPoints(${index}); pattern="\\d+(\\.\\d*)?" placeholder="Score">
+        <div class="deacthlon-event-units" id="deacthlon-units-${index}">${initialUnitsText}</div>
+        <div class="deacthlon-event-points" id="deacthlon-points-${index}">${event.points}</div>
         `;
         eventsContainer.appendChild(eventRow);
         });
         }
 
         function setSameHeight() {
-            var leftColumn = document.getElementById('events-container');
-            var otherDiv = document.getElementById('visual-container');
+            var leftColumn = document.getElementById('deacthlon-events-container');
+            var otherDiv = document.getElementById('deacthlon-visual-container');
             var leftColumnHeight = leftColumn.offsetHeight; // Get the height of the left-column div
             otherDiv.style.height = leftColumnHeight + 'px'; // Set the height of the other div to match
         }
         
         function getUserScore(eventIndex) {
 
-        var scoreInput = document.getElementById('score-' + index);
+        var scoreInput = document.getElementById('deacthlon-score-' + index);
         return parseFloat(scoreInput.value); 
         }
 
@@ -213,13 +213,13 @@
         const length3 = (value3 / maxScore) * 100;
 
         // Get the container where the lines will be drawn
-        const visualization = document.getElementById('visual-container');
+        const visualization = document.getElementById('deacthlon-visual-container');
 
         // Create a container for the lines at the specified height
         const lineContainer = document.createElement('div');
         lineContainer.style.position = 'absolute';
         lineContainer.style.top = inputHeight + 'px'; // Set the top position to the input box's height
-        lineContainer.style.width = '50%'; // Set the width to half of the screen
+        lineContainer.style.width = '80%'; // Set the width to half of the screen
         lineContainer.style.left = '10%' //padding
         lineContainer.style.height = '20px'; // Height of the line
 
